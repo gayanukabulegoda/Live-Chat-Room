@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.liveChatRoom.controller.ChatRoomFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane id="background" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.ChatRoomFormController">
+   <children>
+      <ImageView fitHeight="850.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/image/chatRoomBackground.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="12.0" layoutY="745.0" prefHeight="72.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="838.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/attachmentIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/emojiIcon.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="-57.0" layoutY="80.0" text="  " />
+            <TextField fx:id="txtMessage" layoutX="70.0" layoutY="2.0" onAction="#txtMessageOnAction" prefHeight="68.0" prefWidth="754.0" promptText="Message" style="-fx-background-color: white; -fx-border-color: white;">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </TextField>
+            <JFXButton layoutX="829.0" layoutY="7.0" onAction="#btnAttachOnAction" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" " />
+            <JFXButton layoutX="9.0" layoutY="7.0" onAction="#btnEmojiOnAction" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" " />
+         </children>
+      </Pane>
+      <JFXTextArea fx:id="txtAreaChatRoom" focusColor="WHITE" layoutX="12.0" layoutY="106.0" prefHeight="615.0" prefWidth="1076.0" style="-fx-background-color: white; -fx-background-radius: 16;" unFocusColor="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextArea>
+      <Pane layoutX="919.0" layoutY="745.0" prefHeight="72.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Pane layoutX="4.0" layoutY="4.0" prefHeight="64.0" prefWidth="160.0" style="-fx-background-color: #009CFF; -fx-background-radius: 25;">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assests/icon/sendBtnIcon.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="-3.0" layoutY="-4.0" onAction="#btnSendOnAction" prefHeight="73.0" prefWidth="167.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" " />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fitHeight="82.0" fitWidth="80.0" layoutX="325.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/image/playTechLogoChatRoom.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="416.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayTech Chat Room">
+         <font>
+            <Font name="Arial Bold" size="33.0" />
+         </font>
+      </Text>
+      <Circle fill="WHITE" layoutX="1052.0" layoutY="46.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="1052.0" layoutY="46.0" radius="27.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fitHeight="37.43" fitWidth="35.16" layoutX="1034.5" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/exitBtnIcon.png" />
+         </image></ImageView>
+      <JFXButton layoutX="1025.0" layoutY="17.0" onAction="#btnExitOnAction" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
+      <ImageView fitHeight="28.39" fitWidth="15.96" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/backBtnIcon.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="16.0" layoutY="22.0" onAction="#btnBackOnAction" prefHeight="58.0" prefWidth="40.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
+   </children>
 </AnchorPane>
