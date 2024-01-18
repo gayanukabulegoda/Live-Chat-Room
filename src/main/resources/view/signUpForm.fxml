@@ -11,11 +11,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.SignUpEmployeeConfirmFormController">
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.SignUpFormController">
    <children>
       <ImageView fitHeight="550.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assests/image/logInFormBackground.png" />
+            <Image url="@../assests/image/signUpFormBackground.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="867.0" layoutY="33.0" radius="22.5" stroke="WHITE" strokeType="INSIDE" />
@@ -26,8 +26,8 @@
          </image>
       </ImageView>
       <JFXButton layoutX="-40.0" layoutY="-2.0" text=" " />
-      <JFXButton layoutX="845.0" layoutY="9.0" onAction="#backBtnOnAction" prefHeight="48.0" prefWidth="43.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
-      <TextField fx:id="txtEmployeeId" layoutX="187.0" layoutY="279.0" onAction="#txtEmployeeIdOnAction" prefHeight="35.0" prefWidth="225.0" promptText="    Enter Employee ID" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
+      <JFXButton layoutX="845.0" layoutY="9.0" onAction="#btnBackOnAction" prefHeight="48.0" prefWidth="43.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
+      <TextField fx:id="txtConfirmUserName" layoutX="174.0" layoutY="324.0" onAction="#txtConfirmUserNameOnAction" prefHeight="35.0" prefWidth="225.0" promptText="     Confirm Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
          <font>
             <Font size="15.0" />
          </font>
@@ -48,30 +48,40 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fill="#8fbaf3" layoutX="157.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Me!">
+      <Text fill="#8fbaf3" layoutX="195.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
          <font>
             <Font name="Arial Bold" size="35.0" />
          </font>
       </Text>
-      <Pane layoutX="128.0" layoutY="387.0" prefHeight="40.0" prefWidth="263.0" style="-fx-background-color: #009CFF; -fx-background-radius: 15;">
+      <Pane layoutX="128.0" layoutY="405.0" prefHeight="40.0" prefWidth="263.0" style="-fx-background-color: #009CFF; -fx-background-radius: 15;">
          <children>
-            <Text fill="WHITE" layoutX="100.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm">
+            <Text fill="WHITE" layoutX="100.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
                <font>
                   <Font name="Arial Bold" size="16.5" />
                </font>
             </Text>
          </children>
       </Pane>
-      <JFXButton layoutX="128.0" layoutY="387.0" onAction="#confirmBtnOnAction" prefHeight="40.0" prefWidth="263.0" style="-fx-background-radius: 15;" text=" " />
-      <Label fx:id="lblEmployeeIDAlert" layoutX="170.0" layoutY="320.0" textFill="RED">
+      <JFXButton layoutX="128.0" layoutY="406.0" onAction="#signUpBtnOnAction" prefHeight="40.0" prefWidth="263.0" style="-fx-background-radius: 15;" text=" " />
+      <Label fx:id="lblUserNameAlert" layoutX="164.0" layoutY="297.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
+      <TextField fx:id="txtUserName" layoutX="115.0" layoutY="258.0" onAction="#txtUserNameOnAction" prefHeight="35.0" prefWidth="225.0" promptText="  Create a Valid Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
       <Text fill="WHITE" layoutX="693.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have account? Let's" wrappingWidth="174.54609393168118">
          <font>
             <Font size="12.0" />
          </font>
       </Text>
+      <Label fx:id="lblUserNameConfirmAlert" layoutX="165.0" layoutY="364.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

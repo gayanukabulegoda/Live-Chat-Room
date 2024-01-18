@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.SignUpEmployeeConfirmFormController">
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.SignUpOtpFormController">
    <children>
       <ImageView fitHeight="550.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -27,7 +27,7 @@
       </ImageView>
       <JFXButton layoutX="-40.0" layoutY="-2.0" text=" " />
       <JFXButton layoutX="845.0" layoutY="9.0" onAction="#backBtnOnAction" prefHeight="48.0" prefWidth="43.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
-      <TextField fx:id="txtEmployeeId" layoutX="187.0" layoutY="279.0" onAction="#txtEmployeeIdOnAction" prefHeight="35.0" prefWidth="225.0" promptText="    Enter Employee ID" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
+      <TextField fx:id="txtOtp" layoutX="187.0" layoutY="279.0" onAction="#txtOtpOnAction" prefHeight="35.0" prefWidth="225.0" promptText="        Enter OTP" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
          <font>
             <Font size="15.0" />
          </font>
@@ -48,7 +48,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fill="#8fbaf3" layoutX="157.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Me!">
+      <Text fill="#8fbaf3" layoutX="130.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check MailBox!">
          <font>
             <Font name="Arial Bold" size="35.0" />
          </font>
@@ -63,7 +63,7 @@
          </children>
       </Pane>
       <JFXButton layoutX="128.0" layoutY="387.0" onAction="#confirmBtnOnAction" prefHeight="40.0" prefWidth="263.0" style="-fx-background-radius: 15;" text=" " />
-      <Label fx:id="lblEmployeeIDAlert" layoutX="170.0" layoutY="320.0" textFill="RED">
+      <Label fx:id="lblOtpAlert" layoutX="170.0" layoutY="320.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>

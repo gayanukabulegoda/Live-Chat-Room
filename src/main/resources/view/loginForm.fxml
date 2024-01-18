@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -62,5 +63,15 @@
          </children>
       </Pane>
       <JFXButton layoutX="128.0" layoutY="387.0" onAction="#signInBtnOnAction" prefHeight="40.0" prefWidth="263.0" style="-fx-background-radius: 15;" text=" " />
+      <Label fx:id="lblUserNameAlert" layoutX="170.0" layoutY="320.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="696.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Haven't an account? Let's" wrappingWidth="174.54609393168118">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
