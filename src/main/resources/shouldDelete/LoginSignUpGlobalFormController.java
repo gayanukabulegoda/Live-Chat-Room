@@ -1,4 +1,4 @@
-package lk.ijse.liveChatRoom.controller;
+package view.shouldDelete;
 
 public class LoginSignUpGlobalFormController {
 }

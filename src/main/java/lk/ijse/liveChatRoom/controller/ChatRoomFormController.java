@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXTextArea;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import lk.ijse.liveChatRoom.util.Navigation;
+
+import java.io.IOException;
 
 public class ChatRoomFormController {
 
@@ -19,8 +22,8 @@ public class ChatRoomFormController {
     }
 
     @FXML
-    void btnBackOnAction(ActionEvent event) {
-
+    void btnBackOnAction(ActionEvent event) throws IOException {
+        Navigation.switchNavigation("loginForm.fxml",event);
     }
 
     @FXML
@@ -30,7 +33,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnExitOnAction(ActionEvent event) {
-        System.exit(0);
+        Navigation.exit();
     }
 
     @FXML

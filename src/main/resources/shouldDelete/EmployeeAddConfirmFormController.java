@@ -1,17 +1,17 @@
-package lk.ijse.liveChatRoom.controller;
+package view.shouldDelete;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class SignUpOtpFormController {
+public class EmployeeAddConfirmFormController {
 
     @FXML
-    private Label lblOtpAlert;
+    private Label lblEmployeeIDAlert;
 
     @FXML
-    private TextField txtOtp;
+    private TextField txtEmployeeId;
 
     @FXML
     void backBtnOnAction(ActionEvent event) {
@@ -24,12 +24,7 @@ public class SignUpOtpFormController {
     }
 
     @FXML
-    void signInBtnOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtOtpOnAction(ActionEvent event) {
+    void txtEmployeeIdOnAction(ActionEvent event) {
 
     }
 }

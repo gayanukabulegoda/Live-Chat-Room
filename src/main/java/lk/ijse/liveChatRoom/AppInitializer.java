@@ -17,7 +17,7 @@ public class AppInitializer extends Application {
                 new Scene(
                         FXMLLoader.load(getClass().getResource("/view/loginForm.fxml"))));
 
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.DECORATED);
         stage.centerOnScreen();
         stage.show();
     }

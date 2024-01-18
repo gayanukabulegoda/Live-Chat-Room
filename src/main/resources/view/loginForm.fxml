@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -15,7 +16,7 @@
    <children>
       <ImageView fitHeight="550.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assests/image/logInFormBackground.png" />
+            <Image url="@../assests/image/signInFormBackground.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="867.0" layoutY="33.0" radius="22.5" stroke="WHITE" strokeType="INSIDE" />
@@ -27,17 +28,17 @@
       </ImageView>
       <JFXButton layoutX="-40.0" layoutY="-2.0" text=" " />
       <JFXButton layoutX="845.0" layoutY="9.0" onAction="#btnExitOnAction" prefHeight="48.0" prefWidth="43.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
-      <TextField fx:id="txtUserName" layoutX="187.0" layoutY="279.0" onAction="#txtUserNameOnAction" prefHeight="35.0" prefWidth="225.0" promptText="     Enter Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
+      <TextField fx:id="txtUserName" layoutX="187.0" layoutY="279.0" onAction="#txtUserNameOnAction" prefHeight="35.0" prefWidth="218.0" promptText="     Enter Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <Text fill="#009cff" layoutX="751.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+      <Text fill="#009cff" layoutX="751.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" visible="false">
          <font>
             <Font size="16.5" />
          </font>
       </Text>
-      <JFXButton layoutX="686.0" layoutY="463.5" onAction="#signUpBtnOnAction" prefHeight="32.0" prefWidth="206.0" style="-fx-background-radius: 0 15 15 0;" text=" " />
+      <JFXButton layoutX="686.0" layoutY="463.5" prefHeight="32.0" prefWidth="206.0" style="-fx-background-radius: 0 15 15 0;" text=" " visible="false" />
       <Text fill="WHITE" layoutX="526.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayTech Chat App">
          <font>
             <Font name="Arial Bold" size="35.0" />
@@ -68,9 +69,20 @@
             <Font size="11.0" />
          </font>
       </Label>
-      <Text fill="WHITE" layoutX="696.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Haven't an account? Let's" wrappingWidth="174.54609393168118">
+      <Pane layoutX="874.0" layoutY="383.0" prefHeight="45.0" prefWidth="25.0" style="-fx-background-color: white;" visible="false" />
+      <Circle fill="DODGERBLUE" layoutX="872.0" layoutY="406.0" radius="22.5" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: white; -fx-stroke: white;" visible="false" />
+      <Circle fill="DODGERBLUE" layoutX="872.0" layoutY="406.0" radius="20.5" stroke="DODGERBLUE" strokeType="INSIDE" style="-fx-fill: #; -fx-stroke: white;" visible="false" />
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="860.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../shouldDelete/addEmployeeIcon.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="853.0" layoutY="387.0" prefHeight="38.0" prefWidth="38.0" style="-fx-background-radius: 100;" text=" " visible="false" />
+      <Line endX="161.63970947265625" layoutX="684.0" layoutY="413.0" startX="-100.0" stroke="WHITE" />
+      <Line endX="161.63970947265625" layoutX="686.0" layoutY="497.0" startX="-100.0" stroke="WHITE" />
+      <Text fill="WHITE" layoutX="609.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In to enjoy group chat experience..." textAlignment="CENTER" wrappingWidth="218.18244647074368">
          <font>
-            <Font size="12.0" />
+            <Font size="18.0" />
          </font>
       </Text>
    </children>
