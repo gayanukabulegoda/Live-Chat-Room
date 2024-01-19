@@ -11,6 +11,7 @@ public class LoginFormController {
 
     @FXML
     private TextField txtUserName;
+    public static String username;
 
     @FXML
     void btnExitOnAction(ActionEvent event) {
@@ -19,7 +20,7 @@ public class LoginFormController {
 
     @FXML
     void signInBtnOnAction(ActionEvent event) throws IOException {
-        txtUserName.getText();
+        username = txtUserName.getText();
         Navigation.switchNavigation("chatRoomForm.fxml",event);
     }
 
