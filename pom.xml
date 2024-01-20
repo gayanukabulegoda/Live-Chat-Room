@@ -11,6 +11,7 @@
     <modules>
         <module>Server</module>
         <module>Client_01</module>
+        <module>Client_02</module>
     </modules>
 
     <properties>
