@@ -10,7 +10,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,6 +25,9 @@ import java.io.*;
 import java.net.Socket;
 
 public class ChatRoomFormController {
+
+    @FXML
+    private Pane emojiPane;
 
     @FXML
     private Label lblUsername;
@@ -196,7 +201,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnEmojiOnAction(ActionEvent event) {
-
+        emojiPane.setVisible(!emojiPane.isVisible());
     }
 
     @FXML
@@ -223,5 +228,131 @@ public class ChatRoomFormController {
     @FXML
     void txtMessageOnAction(ActionEvent event) throws IOException {
         btnSendOnAction(event);
+    }
+
+    @FXML
+    void imgAnxiousFaceWithSweatEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE30"); //😰
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgCryingFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE22"); //😢
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgDisappointedFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE1E"); //😞
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgFaceWithTearsOfJoyEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE02"); //😂
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgFaceWithTongueEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE1B"); //😛
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgFearfulFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE28"); //😦
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgGrinningFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE00"); //😀
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgHushedFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE2F"); //😯
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgLoudlyCryingEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE2D"); //😭
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgLoveHeartsEyesEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE0D"); //😍
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgExpressionlessFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE11"); //😑
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgSleepingFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE34"); //😴
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgSmilingFaceWithSunglassesEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE0E"); //😎
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgSmilingFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE0A"); //😊
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgSmilingFaceWithHaloEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE07"); //😇
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgThumbsDownEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDC4E"); //👎
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgThumbUpEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDC4D"); //👍
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
+    }
+
+    @FXML
+    void imgWinkingFaceEmojiOnMouseClicked(MouseEvent event) {
+        txtMessage.appendText("\uD83D\uDE09"); //😉
+        emojiPane.setVisible(false);
+        txtMessage.requestFocus();
     }
 }

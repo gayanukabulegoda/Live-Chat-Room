@@ -94,5 +94,99 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
+      <Pane fx:id="emojiPane" layoutX="19.0" layoutY="506.0" prefHeight="225.0" prefWidth="401.0" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-color: #009CFF; -fx-border-radius: 18;" visible="false">
+         <children>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="26.0" onMouseClicked="#imgThumbUpEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/thumbUpEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="26.0" onMouseClicked="#imgSmilingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/smilingFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="26.0" onMouseClicked="#imgSmilingFaceWithSunglassesEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/smilingFaceWithSunglasses.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="26.0" onMouseClicked="#imgWinkingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/winkingFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="26.0" onMouseClicked="#imgLoveHeartsEyesEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/loveHeartsEyesEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="26.0" onMouseClicked="#imgGrinningFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/grinningFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="94.0" onMouseClicked="#imgLoudlyCryingEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/loudlyCryingEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="94.0" onMouseClicked="#imgAnxiousFaceWithSweatEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/anxiousFaceWithSweatEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="94.0" onMouseClicked="#imgFaceWithTongueEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/faceWithTongueEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="94.0" onMouseClicked="#imgExpressionlessFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/expressionlessFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="94.0" onMouseClicked="#imgSmilingFaceWithHaloEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/smilingFaceWithHaloEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="94.0" onMouseClicked="#imgFaceWithTearsOfJoyEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/faceWithTearsOfJoyEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="162.0" onMouseClicked="#imgDisappointedFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/disappointedFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="162.0" onMouseClicked="#imgHushedFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/hushedFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="162.0" onMouseClicked="#imgCryingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/cryingFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="162.0" onMouseClicked="#imgSleepingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/sleepingFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="162.0" onMouseClicked="#imgFearfulFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/fearfulFaceEmoji.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="162.0" onMouseClicked="#imgThumbsDownEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/emoji/thumbsDownEmoji.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
