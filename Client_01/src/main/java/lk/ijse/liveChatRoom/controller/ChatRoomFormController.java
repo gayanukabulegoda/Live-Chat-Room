@@ -23,6 +23,9 @@ import lk.ijse.liveChatRoom.util.Navigation;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class ChatRoomFormController {
 
@@ -45,6 +48,7 @@ public class ChatRoomFormController {
     DataOutputStream dataOutputStream;
     String message = "";
     private File file;
+    private String base64Image;
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
 
@@ -80,12 +84,13 @@ public class ChatRoomFormController {
                     if (firstCharacter.equalsIgnoreCase("img")) {
                         String[] splitMessage = receivedFullMsg.split(":");
                         String path = splitMessage[1];
-                        System.out.println("Message Path :"+path);
+                        System.out.println("Message Path :" + path);
 
-                        File file = new File(path);
-                        Image image = new Image(file.toURI().toString());
+                        File receivedImageFile = decodeReceivedImage(path);
 
-                        ImageView imageView =  new ImageView(image);
+                        Image receivedImage = new Image(receivedImageFile.toURI().toString());
+
+                        ImageView imageView =  new ImageView(receivedImage);
                         imageView.setFitHeight(300);
                         imageView.setFitWidth(300);
 
@@ -134,6 +139,20 @@ public class ChatRoomFormController {
                 //throw new RuntimeException(e);
             }
         }).start();
+    }
+
+    private File decodeReceivedImage(String path) throws IOException {
+        byte[] imageBytes = Base64.getDecoder().decode(path); // Decode Base64 image data
+
+        // Create a file to save the received image
+        String fileName = "Received Image File";
+        File receivedImageFile = new File(fileName);
+
+        // Write the image bytes to the file
+        try (FileOutputStream fos = new FileOutputStream(receivedImageFile)) {
+            fos.write(imageBytes);
+        }
+        return receivedImageFile;
     }
 
     private void sendMessage(String messageToSend) {
@@ -208,6 +227,11 @@ public class ChatRoomFormController {
         if (file != null) {
             txtMessage.setText("01 Image Selected");
             txtMessage.setEditable(false);
+
+            // Read image file into byte array
+            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
             btnSendOnAction(event);
         }
     }
@@ -239,7 +263,7 @@ public class ChatRoomFormController {
         //dataOutputStream.flush();
         if (!txtMessage.getText().isEmpty()){
             if (file != null) {
-                printWriter.println("img"+lblUsername.getText()+":"+file.getPath());
+                printWriter.println("img"+lblUsername.getText() +":"+ base64Image);
                 file = null;
             } else {
                 printWriter.println(lblUsername.getText() + ": " + txtMessage.getText());
