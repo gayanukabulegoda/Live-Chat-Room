@@ -74,7 +74,7 @@ public class ChatRoomFormController {
                         System.out.println("First Char: "+firstCharacter);
                     }
                     if (firstCharacter.equalsIgnoreCase("img")) {
-                        String[] splitMessage = receivedFullMsg.split("img");
+                        String[] splitMessage = receivedFullMsg.split(":");
                         String path = splitMessage[1];
                         System.out.println("Message Path :"+path);
 
@@ -88,9 +88,14 @@ public class ChatRoomFormController {
                         HBox hBox = new HBox(10);
                         hBox.setAlignment(Pos.BOTTOM_RIGHT);
 
-                        if (lblUsername.getText().equalsIgnoreCase(username)) {
+                        //to remove prefix "img"
+                        String[] name = username.split("img");
+                        String finalName = name[1];
+
+                        if (lblUsername.getText().equalsIgnoreCase(finalName)) {
                             hBox.setAlignment(Pos.TOP_RIGHT);
                             hBox.getChildren().add(imageView);
+                            hBox.setPadding(new Insets(5,5,5,10));
 
                             Text text = new Text(": Me ");
                             hBox.getChildren().add(text);
@@ -99,9 +104,10 @@ public class ChatRoomFormController {
                             vBox.setAlignment(Pos.TOP_LEFT);
                             hBox.setAlignment(Pos.TOP_LEFT);
 
-                            Text text = new Text(" "+username+" :");
+                            Text text = new Text(" "+finalName+" :");
                             hBox.getChildren().add(text);
                             hBox.getChildren().add(imageView);
+                            hBox.setPadding(new Insets(5,5,5,10));
                         }
 
                         Platform.runLater(() ->
@@ -183,7 +189,7 @@ public class ChatRoomFormController {
     }
 
     @FXML
-    void btnAttachOnAction(ActionEvent event) {
+    void btnAttachOnAction(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image!!");
 
@@ -196,6 +202,7 @@ public class ChatRoomFormController {
         if (file != null) {
             txtMessage.setText("01 Image Selected");
             txtMessage.setEditable(false);
+            btnSendOnAction(event);
         }
     }
 
@@ -216,13 +223,17 @@ public class ChatRoomFormController {
 
     @FXML
     void btnSendOnAction(ActionEvent event) throws IOException {
-        //dataOutputStream.writeUTF(txtMessage.getText());
-       // txtAreaChatRoom.appendText(LoginFormController.username+": "+txtMessage.getText());
-        String messageToSend = txtMessage.getText();
-        printWriter.println(lblUsername.getText()+": "+messageToSend);
-        txtMessage.setEditable(true);
-        txtMessage.clear();
-        //dataOutputStream.flush();
+        if (!txtMessage.getText().isEmpty()) {
+            if (file != null) {
+                printWriter.println("img"+lblUsername.getText()+":"+file.getPath());
+                file = null;
+            } else {
+                printWriter.println(lblUsername.getText() + ": " + txtMessage.getText());
+            }
+            txtMessage.setEditable(true);
+            emojiPane.setVisible(false);
+            txtMessage.clear();
+        }
     }
 
     @FXML

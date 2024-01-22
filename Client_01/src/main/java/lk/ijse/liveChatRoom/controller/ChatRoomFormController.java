@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -20,7 +19,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import lk.ijse.liveChatRoom.util.Navigation;
 
 import java.io.*;
@@ -74,11 +72,13 @@ public class ChatRoomFormController {
                     //finding the arrived message type
                     String firstCharacter = "";
                     if (username.length() > 3) {
-                        firstCharacter = username.substring(0, 4);
+                        firstCharacter = username.substring(0, 3);
                         System.out.println("First Char: "+firstCharacter);
                     }
-                    if (firstCharacter.equalsIgnoreCase(" img")) {
-                        String[] splitMessage = receivedFullMsg.split("img");
+
+                    //if an Image arrived
+                    if (firstCharacter.equalsIgnoreCase("img")) {
+                        String[] splitMessage = receivedFullMsg.split(":");
                         String path = splitMessage[1];
                         System.out.println("Message Path :"+path);
 
@@ -92,20 +92,29 @@ public class ChatRoomFormController {
                         HBox hBox = new HBox(10);
                         hBox.setAlignment(Pos.BOTTOM_RIGHT);
 
-                        if (lblUsername.getText().equalsIgnoreCase(username)) {
+                        //to remove prefix "img"
+                        String[] name = username.split("img");
+                        String finalName = name[1];
+
+                        //if received Image selected by me
+                        if (lblUsername.getText().equalsIgnoreCase(finalName)) {
                             hBox.setAlignment(Pos.TOP_RIGHT);
                             hBox.getChildren().add(imageView);
+                            hBox.setPadding(new Insets(5,5,5,10)); //set space between images
 
                             Text text = new Text(": Me ");
                             hBox.getChildren().add(text);
                         }
+
+                        //if received Image selected by another client
                         else {
                             vBox.setAlignment(Pos.TOP_LEFT);
                             hBox.setAlignment(Pos.TOP_LEFT);
 
-                            Text text = new Text(" "+username+" :");
+                            Text text = new Text(" "+finalName+" :");
                             hBox.getChildren().add(text);
                             hBox.getChildren().add(imageView);
+                            hBox.setPadding(new Insets(5,5,5,10));
                         }
 
                         Platform.runLater(() ->
@@ -186,8 +195,8 @@ public class ChatRoomFormController {
     }
 
     @FXML
-    void btnAttachOnAction(ActionEvent event) {
-       /* FileChooser fileChooser = new FileChooser();
+    void btnAttachOnAction(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image!!");
 
         FileChooser.ExtensionFilter imageFilter =
@@ -199,12 +208,8 @@ public class ChatRoomFormController {
         if (file != null) {
             txtMessage.setText("01 Image Selected");
             txtMessage.setEditable(false);
-        }*/
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FileChooser fileChooser1 = new FileChooser();
-        this.file = fileChooser1.showOpenDialog(stage);
-        printWriter.println(lblUsername.getText()+": img"+file.getPath());
+            btnSendOnAction(event);
+        }
     }
 
     @FXML
@@ -226,12 +231,23 @@ public class ChatRoomFormController {
     void btnSendOnAction(ActionEvent event) throws IOException {
         //dataOutputStream.writeUTF(txtMessage.getText());
        // txtAreaChatRoom.appendText(LoginFormController.username+": "+txtMessage.getText());
-        String messageToSend = txtMessage.getText();
+        /*String messageToSend = txtMessage.getText();
         printWriter.println(lblUsername.getText()+": "+messageToSend);
         txtMessage.setEditable(true);
         emojiPane.setVisible(false);
-        txtMessage.clear();
+        txtMessage.clear();*/
         //dataOutputStream.flush();
+        if (!txtMessage.getText().isEmpty()){
+            if (file != null) {
+                printWriter.println("img"+lblUsername.getText()+":"+file.getPath());
+                file = null;
+            } else {
+                printWriter.println(lblUsername.getText() + ": " + txtMessage.getText());
+            }
+            txtMessage.setEditable(true);
+            emojiPane.setVisible(false);
+            txtMessage.clear();
+        }
     }
 
     @FXML
