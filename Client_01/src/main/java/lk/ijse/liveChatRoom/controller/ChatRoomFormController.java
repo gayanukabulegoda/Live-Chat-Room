@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -24,6 +25,9 @@ import lk.ijse.liveChatRoom.util.Navigation;
 import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -78,45 +82,9 @@ public class ChatRoomFormController {
 
                     //if an Image arrived
                     if (firstCharacter.equalsIgnoreCase("img")) {
-                        String[] splitMessage = receivedFullMsg.split(":");
-                        String path = splitMessage[1];
-                        System.out.println("Message Path :" + path);
-
-                        File receivedImageFile = decodeReceivedImage(path);
-
-                        Image receivedImage = new Image(receivedImageFile.toURI().toString());
-
-                        ImageView imageView =  new ImageView(receivedImage);
-                        imageView.setFitHeight(300);
-                        imageView.setFitWidth(300);
-
-                        HBox hBox = new HBox(10);
-                        hBox.setAlignment(Pos.BOTTOM_RIGHT);
-
-                        //if received Image selected by me
-                        if (lblUsername.getText().equalsIgnoreCase(finalName)) {
-                            hBox.setAlignment(Pos.TOP_RIGHT);
-                            hBox.getChildren().add(imageView);
-                            hBox.setPadding(new Insets(5,5,5,10)); //set space between images
-
-                            Text text = new Text(": Me ");
-                            hBox.getChildren().add(text);
-                        }
-
-                        //if received Image selected by another client
-                        else {
-                            vBox.setAlignment(Pos.TOP_LEFT);
-                            hBox.setAlignment(Pos.TOP_LEFT);
-
-                            Text text = new Text(" "+finalName+" :");
-                            hBox.getChildren().add(text);
-                            hBox.getChildren().add(imageView);
-                            hBox.setPadding(new Insets(5,5,5,10));
-                        }
-
-                        Platform.runLater(() ->
-                                vBox.getChildren().addAll(hBox));
+                        setImage(receivedFullMsg);
                     }
+
                     // display new client who join the chat
                     else if (firstCharacter.equalsIgnoreCase("joi")){
                         HBox hBox = new HBox();
@@ -160,11 +128,25 @@ public class ChatRoomFormController {
                         }
                     }
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private HBox setTime() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+
+        Text time = new Text(dateTimeFormatter.format(now));
+        time.setFont(Font.font(10));
+        time.getStyleClass().add("time-text");
+
+        HBox timeBox = new HBox();
+        timeBox.getChildren().add(time);
+        timeBox.setAlignment(Pos.BOTTOM_RIGHT);
+
+        return timeBox;
     }
 
     private void removePrefixes(String username, String firstCharacter) {
@@ -205,18 +187,90 @@ public class ChatRoomFormController {
         return receivedImageFile;
     }
 
+    private void setImage(String receivedFullMsg) throws IOException {
+        String[] splitMessage = receivedFullMsg.split(":");
+        String path = splitMessage[1];
+        System.out.println("Message Path :" + path);
+
+        File receivedImageFile = decodeReceivedImage(path);
+
+        Image receivedImage = new Image(receivedImageFile.toURI().toString());
+
+        ImageView imageView =  new ImageView(receivedImage);
+        imageView.setFitHeight(300);
+        imageView.setFitWidth(300);
+
+        HBox imageBox = new HBox(imageView);
+        imageBox.setPadding(new Insets(5));
+
+        HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.BOTTOM_RIGHT);
+
+        // Created an inner HBox to contain both the imageHBox and timeHBox
+        HBox innerHBox = new HBox();
+        innerHBox.setPadding(new Insets(5,10,5,10));
+
+        // Add time
+        HBox timeBox = setTime();
+
+        //if received Image selected by me
+        if (lblUsername.getText().equalsIgnoreCase(finalName)) {
+            // Set color for the Text within the timeBox
+            for (Node node : timeBox.getChildren()) {
+                if (node instanceof Text) {
+                    ((Text) node).setFill(Color.color(0.934, 0.945, 0.996));
+                }
+            }
+
+            innerHBox.setStyle(
+                    "-fx-background-color: rgb(15,125,242);" +
+                            "-fx-background-radius: 20px"
+            );
+
+            innerHBox.getChildren().addAll(imageBox,timeBox);
+
+            hBox.getChildren().add(innerHBox);
+            hBox.setAlignment(Pos.TOP_RIGHT);
+            hBox.setPadding(new Insets(5,5,5,10)); //set space between images
+        }
+
+        //if received Image selected by another client
+        else {
+            innerHBox.setStyle(
+                    "-fx-background-color: rgb(233,233,235);" +
+                            "-fx-background-radius: 20px"
+            );
+
+            vBox.setAlignment(Pos.TOP_LEFT);
+            hBox.setAlignment(Pos.TOP_LEFT);
+
+            Text text = new Text(" " + finalName + " :");
+            text.setFont(Font.font(12.5));
+
+            innerHBox.getChildren().addAll(text,imageBox,timeBox);
+            hBox.getChildren().add(innerHBox);
+            hBox.setPadding(new Insets(5,5,5,10));
+        }
+
+        Platform.runLater(() ->
+                vBox.getChildren().addAll(hBox));
+    }
+
     private void sendMessage(String messageToSend) {
         if (!messageToSend.isEmpty()) {
             HBox hBox = new HBox();
             hBox.setAlignment(Pos.CENTER_RIGHT);
             hBox.setPadding(new Insets(5,10,5,10));
 
+            // Created an inner HBox to contain both the message and time
+            HBox innerHBox = new HBox();
+            innerHBox.setPadding(new Insets(2,10,2.5,10));
+
             Text text = new Text(messageToSend);
             text.setFont(Font.font(17));
             TextFlow textFlow = new TextFlow(text);
 
-            textFlow.setStyle(
-                    "-fx-color: rgb(239,242,255);" +
+            innerHBox.setStyle(
                     "-fx-background-color: rgb(15,125,242);" +
                     "-fx-background-radius: 20px"
             );
@@ -224,7 +278,19 @@ public class ChatRoomFormController {
             textFlow.setPadding(new Insets(5,10,5,10));
             text.setFill(Color.color(0.934, 0.945, 0.996));
 
-            hBox.getChildren().add(textFlow);
+            // Add time
+            HBox timeBox = setTime();
+
+            // Set color for the Text within the timeBox
+            for (Node node : timeBox.getChildren()) {
+                if (node instanceof Text) {
+                    ((Text) node).setFill(Color.color(0.934, 0.945, 0.996));
+                }
+            }
+
+            innerHBox.getChildren().addAll(textFlow, timeBox);
+            hBox.getChildren().add(innerHBox);
+
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -237,23 +303,38 @@ public class ChatRoomFormController {
     private void receivedMessage(String receivedMsg) {
         String[] name = receivedMsg.split(":");
         String username = name[0];
+        String message = name[1];
+
         if (!lblUsername.getText().equals(username)) {
             HBox hBox = new HBox();
             hBox.setAlignment(Pos.CENTER_LEFT);
             hBox.setPadding(new Insets(5,5,5,10));
 
-            Text text = new Text(receivedMsg);
-            text.setFont(Font.font(17));
-            TextFlow textFlow = new TextFlow(text);
+            // Created an inner HBox to contain both the message and time
+            HBox innerHBox = new HBox();
+            innerHBox.setPadding(new Insets(2,10,2.5,5));
 
-            textFlow.setStyle(
+            Text txtUsername = new Text(username + ": ");
+            txtUsername.setFont(Font.font(12.5));
+
+            Text txtMessage = new Text(message);
+            txtMessage.setFont(Font.font(17));
+
+            TextFlow textFlow = new TextFlow(txtUsername, txtMessage);
+
+            innerHBox.setStyle(
                     "-fx-background-color: rgb(233,233,235);" +
                     "-fx-background-radius: 20px"
             );
 
             textFlow.setPadding(new Insets(5,10,5,10));
 
-            hBox.getChildren().add(textFlow);
+            // Add time
+            HBox timeBox = setTime();
+
+            innerHBox.getChildren().addAll(textFlow, timeBox);
+            hBox.getChildren().add(innerHBox);
+
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
