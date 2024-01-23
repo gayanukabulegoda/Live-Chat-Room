@@ -45,12 +45,11 @@ public class ChatRoomFormController {
     private VBox vBox;
 
     Socket remoteSocket;
-    DataOutputStream dataOutputStream;
-    String message = "";
     private File file;
     private String base64Image;
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
+    private String finalName;
 
     public void initialize() {
         lblUsername.setText(LoginFormController.username);
@@ -60,11 +59,9 @@ public class ChatRoomFormController {
                 System.out.println("Client: "+lblUsername.getText()+" Connected!");
 
                 bufferedReader = new BufferedReader(new InputStreamReader(remoteSocket.getInputStream()));
-                System.out.println("1");
-                printWriter = new PrintWriter(remoteSocket.getOutputStream(),true);
-                System.out.println("3");
-                //dataOutputStream = new DataOutputStream(remoteSocket.getOutputStream());
-                //printWriter.println(lblUsername.getText()+" joining...");
+                printWriter = new PrintWriter(remoteSocket.getOutputStream(),true); //like dataOutputStream
+
+                printWriter.println("joi"+lblUsername.getText()+": joining...");
 
                 while (true) {
                     //reading the response
@@ -74,11 +71,10 @@ public class ChatRoomFormController {
                     String message = splitTheMsg[1];
 
                     //finding the arrived message type
-                    String firstCharacter = "";
-                    if (username.length() > 3) {
-                        firstCharacter = username.substring(0, 3);
-                        System.out.println("First Char: "+firstCharacter);
-                    }
+                    String firstCharacter = findingTheArrivedMessageType(username);
+
+                    //remove the username prefixes (if available)
+                    removePrefixes(username, firstCharacter);
 
                     //if an Image arrived
                     if (firstCharacter.equalsIgnoreCase("img")) {
@@ -96,10 +92,6 @@ public class ChatRoomFormController {
 
                         HBox hBox = new HBox(10);
                         hBox.setAlignment(Pos.BOTTOM_RIGHT);
-
-                        //to remove prefix "img"
-                        String[] name = username.split("img");
-                        String finalName = name[1];
 
                         //if received Image selected by me
                         if (lblUsername.getText().equalsIgnoreCase(finalName)) {
@@ -125,6 +117,41 @@ public class ChatRoomFormController {
                         Platform.runLater(() ->
                                 vBox.getChildren().addAll(hBox));
                     }
+                    // display new client who join the chat
+                    else if (firstCharacter.equalsIgnoreCase("joi")){
+                        HBox hBox = new HBox();
+                        if (lblUsername.getText().equals(finalName)) {
+                            Label joinText = new Label("You have joined the Chat");
+                            joinText.getStyleClass().add("join-text");
+
+                            hBox.getChildren().add(joinText);
+                            hBox.setAlignment(Pos.CENTER);
+                            hBox.setPadding(new Insets(5,5,5,10));
+                        }
+                        else {
+                            Label joinText = new Label(finalName+" has joined the Chat");
+                            joinText.getStyleClass().add("join-text");
+                            hBox.getChildren().add(joinText);
+                            hBox.setAlignment(Pos.CENTER);
+                            hBox.setPadding(new Insets(5,5,5,10));
+                        }
+
+                        Platform.runLater(() ->
+                                vBox.getChildren().addAll(hBox));
+                    }
+                    // display the client who left the chat
+                    else if (firstCharacter.equalsIgnoreCase("lef")) {
+                        Label leftText = new Label(finalName + " has left the Chat");
+                        leftText.getStyleClass().add("left-text");
+
+                        HBox hBox = new HBox();
+                        hBox.getChildren().add(leftText);
+                        hBox.setAlignment(Pos.CENTER);
+                        hBox.setPadding(new Insets(5, 5, 5, 10));
+
+                        Platform.runLater(() ->
+                                vBox.getChildren().add(hBox));
+                    }
                     else {
                         if (lblUsername.getText().equalsIgnoreCase(username)) {
                             sendMessage(message);
@@ -136,9 +163,32 @@ public class ChatRoomFormController {
 
             } catch (IOException e) {
                 e.printStackTrace();
-                //throw new RuntimeException(e);
             }
         }).start();
+    }
+
+    private void removePrefixes(String username, String firstCharacter) {
+        if (firstCharacter.equalsIgnoreCase("img")) {
+            String[] name = username.split("img"); //to remove prefix "img"
+            finalName = name[1];
+        }
+        else if (firstCharacter.equalsIgnoreCase("joi")) {
+            String[] name = username.split("joi"); //to remove prefix "joi"
+            finalName = name[1];
+        }
+        else if (firstCharacter.equalsIgnoreCase("lef")) {
+            String[] name = username.split("lef"); //to remove prefix "lef"
+            finalName = name[1];
+        }
+    }
+
+    private String findingTheArrivedMessageType(String username) {
+        String firstCharacter = "";
+        if (username.length() > 3) {
+            firstCharacter = username.substring(0, 3);
+            System.out.println("First Char: " + firstCharacter);
+        }
+        return firstCharacter;
     }
 
     private File decodeReceivedImage(String path) throws IOException {
@@ -248,19 +298,12 @@ public class ChatRoomFormController {
 
     @FXML
     void btnExitOnAction(ActionEvent event) {
+        printWriter.println("lef" + lblUsername.getText() + ": leaving");
         Navigation.exit();
     }
 
     @FXML
-    void btnSendOnAction(ActionEvent event) throws IOException {
-        //dataOutputStream.writeUTF(txtMessage.getText());
-       // txtAreaChatRoom.appendText(LoginFormController.username+": "+txtMessage.getText());
-        /*String messageToSend = txtMessage.getText();
-        printWriter.println(lblUsername.getText()+": "+messageToSend);
-        txtMessage.setEditable(true);
-        emojiPane.setVisible(false);
-        txtMessage.clear();*/
-        //dataOutputStream.flush();
+    void btnSendOnAction(ActionEvent event) {
         if (!txtMessage.getText().isEmpty()){
             if (file != null) {
                 printWriter.println("img"+lblUsername.getText() +":"+ base64Image);
