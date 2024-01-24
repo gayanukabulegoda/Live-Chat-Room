@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,6 +29,7 @@ import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 public class ChatRoomFormController {
 
@@ -36,6 +38,9 @@ public class ChatRoomFormController {
 
     @FXML
     private Label lblUsername;
+
+    @FXML
+    private Label lblMessageTextAlert;
 
     @FXML
     private ScrollPane scrollPane;
@@ -47,8 +52,6 @@ public class ChatRoomFormController {
     private VBox vBox;
 
     Socket remoteSocket;
-    DataOutputStream dataOutputStream;
-    String message = "";
     private File file;
     private String base64Image;
     private PrintWriter printWriter;
@@ -128,7 +131,6 @@ public class ChatRoomFormController {
                         }
                     }
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -273,7 +275,7 @@ public class ChatRoomFormController {
 
             innerHBox.setStyle(
                     "-fx-background-color: rgb(15,125,242);" +
-                            "-fx-background-radius: 20px"
+                    "-fx-background-radius: 20px"
             );
 
             textFlow.setPadding(new Insets(5,10,5,10));
@@ -325,7 +327,7 @@ public class ChatRoomFormController {
 
             innerHBox.setStyle(
                     "-fx-background-color: rgb(233,233,235);" +
-                            "-fx-background-radius: 20px"
+                    "-fx-background-radius: 20px"
             );
 
             textFlow.setPadding(new Insets(5,10,5,10));
@@ -347,6 +349,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnAttachOnAction(ActionEvent event) throws IOException {
+        lblMessageTextAlert.setText(" ");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image!!");
 
@@ -370,6 +373,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnEmojiOnAction(ActionEvent event) {
+        lblMessageTextAlert.setText(" ");
         emojiPane.setVisible(!emojiPane.isVisible());
     }
 
@@ -385,10 +389,10 @@ public class ChatRoomFormController {
     }
 
     @FXML
-    void btnSendOnAction(ActionEvent event) throws IOException {
-        if (!txtMessage.getText().isEmpty()) {
+    void btnSendOnAction(ActionEvent event) {
+        if (validateMessage()){
             if (file != null) {
-                printWriter.println("img"+lblUsername.getText() + ":" + base64Image);
+                printWriter.println("img"+lblUsername.getText() +":"+ base64Image);
                 file = null;
             } else {
                 printWriter.println(lblUsername.getText() + ": " + txtMessage.getText());
@@ -397,11 +401,25 @@ public class ChatRoomFormController {
             emojiPane.setVisible(false);
             txtMessage.clear();
         }
+        else {
+            lblMessageTextAlert.setText("Message should have at least a character!!");
+        }
+    }
+
+    private boolean validateMessage() {
+        return Pattern.matches("^.+$", txtMessage.getText());
     }
 
     @FXML
-    void txtMessageOnAction(ActionEvent event) throws IOException {
+    void txtMessageOnAction(ActionEvent event) {
         btnSendOnAction(event);
+    }
+
+    @FXML
+    void txtMessageOnKeyPressed(KeyEvent event) {
+        if (!txtMessage.getText().isEmpty()) {
+            lblMessageTextAlert.setText(" ");
+        }
     }
 
     @FXML

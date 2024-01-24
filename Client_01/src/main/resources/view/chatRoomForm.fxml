@@ -33,7 +33,7 @@
                </image>
             </ImageView>
             <JFXButton layoutX="-57.0" layoutY="80.0" text="  " />
-            <TextField fx:id="txtMessage" layoutX="70.0" layoutY="2.0" onAction="#txtMessageOnAction" prefHeight="68.0" prefWidth="754.0" promptText="Message" style="-fx-background-color: white; -fx-border-color: white;">
+            <TextField fx:id="txtMessage" layoutX="70.0" layoutY="2.0" onAction="#txtMessageOnAction" onKeyPressed="#txtMessageOnKeyPressed" prefHeight="68.0" prefWidth="754.0" promptText="Message" style="-fx-background-color: white; -fx-border-color: white;">
                <font>
                   <Font size="21.0" />
                </font>
@@ -188,5 +188,10 @@
             </ImageView>
          </children>
       </Pane>
+      <Label fx:id="lblMessageTextAlert" layoutX="96.0" layoutY="801.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

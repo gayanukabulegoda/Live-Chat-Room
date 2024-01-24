@@ -19,17 +19,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import lk.ijse.liveChatRoom.util.Navigation;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 public class ChatRoomFormController {
 
@@ -38,6 +38,9 @@ public class ChatRoomFormController {
 
     @FXML
     private Label lblUsername;
+
+    @FXML
+    private Label lblMessageTextAlert;
 
     @FXML
     private ScrollPane scrollPane;
@@ -346,6 +349,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnAttachOnAction(ActionEvent event) throws IOException {
+        lblMessageTextAlert.setText(" ");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image!!");
 
@@ -369,6 +373,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnEmojiOnAction(ActionEvent event) {
+        lblMessageTextAlert.setText(" ");
         emojiPane.setVisible(!emojiPane.isVisible());
     }
 
@@ -385,7 +390,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
-        if (!txtMessage.getText().isEmpty()){
+        if (validateMessage()){
             if (file != null) {
                 printWriter.println("img"+lblUsername.getText() +":"+ base64Image);
                 file = null;
@@ -396,11 +401,25 @@ public class ChatRoomFormController {
             emojiPane.setVisible(false);
             txtMessage.clear();
         }
+        else {
+            lblMessageTextAlert.setText("Message should have at least a character!!");
+        }
+    }
+
+    private boolean validateMessage() {
+        return Pattern.matches("^.+$", txtMessage.getText());
     }
 
     @FXML
-    void txtMessageOnAction(ActionEvent event) throws IOException {
+    void txtMessageOnAction(ActionEvent event) {
         btnSendOnAction(event);
+    }
+
+    @FXML
+    void txtMessageOnKeyPressed(KeyEvent event) {
+        if (!txtMessage.getText().isEmpty()) {
+            lblMessageTextAlert.setText(" ");
+        }
     }
 
     @FXML

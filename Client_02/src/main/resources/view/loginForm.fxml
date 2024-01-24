@@ -28,7 +28,7 @@
       </ImageView>
       <JFXButton layoutX="-40.0" layoutY="-2.0" text=" " />
       <JFXButton layoutX="845.0" layoutY="9.0" onAction="#btnExitOnAction" prefHeight="48.0" prefWidth="43.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
-      <TextField fx:id="txtUserName" layoutX="187.0" layoutY="279.0" onAction="#txtUserNameOnAction" prefHeight="35.0" prefWidth="218.0" promptText="     Enter Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
+      <TextField fx:id="txtUserName" layoutX="187.0" layoutY="279.0" onAction="#txtUserNameOnAction" onKeyPressed="#txtUserNameOnKeyPressed" prefHeight="35.0" prefWidth="218.0" promptText="     Enter Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
          <font>
             <Font size="15.0" />
          </font>
