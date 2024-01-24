@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -15,19 +16,19 @@
 
 <AnchorPane id="background" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.ChatRoomFormController">
    <children>
-      <ImageView fitHeight="850.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgChatRoomBackground" fitHeight="850.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/image/chatRoomBackground.png" />
          </image>
       </ImageView>
-      <Pane layoutX="12.0" layoutY="745.0" prefHeight="72.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <Pane fx:id="txtMessagePane" layoutX="12.0" layoutY="745.0" prefHeight="72.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="838.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgAttachIcon" fitHeight="36.0" fitWidth="36.0" layoutX="838.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/icon/attachmentIcon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgEmojiIcon" fitHeight="38.0" fitWidth="38.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/icon/emojiIcon.png" />
                </image>
@@ -37,49 +38,57 @@
                <font>
                   <Font size="21.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
             </TextField>
-            <JFXButton layoutX="829.0" layoutY="7.0" onAction="#btnAttachOnAction" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" " />
-            <JFXButton layoutX="9.0" layoutY="7.0" onAction="#btnEmojiOnAction" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" " />
+            <JFXButton layoutX="829.0" layoutY="7.0" onAction="#btnAttachOnAction" onMouseEntered="#btnAttachOnMouseEntered" onMouseExited="#btnAttachOnMouseExited" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton layoutX="9.0" layoutY="7.0" onAction="#btnEmojiOnAction" onMouseEntered="#btnEmojiOnMouseEntered" onMouseExited="#btnEmojiOnMouseExited" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" ">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="919.0" layoutY="745.0" prefHeight="72.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <Pane fx:id="sendBtnOuterPane" layoutX="919.0" layoutY="745.0" prefHeight="72.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <Pane layoutX="4.0" layoutY="4.0" prefHeight="64.0" prefWidth="160.0" style="-fx-background-color: #009CFF; -fx-background-radius: 25;">
+            <Pane fx:id="sendBtnInnerPane" layoutX="4.0" layoutY="4.0" prefHeight="64.0" prefWidth="160.0" style="-fx-background-color: #009CFF; -fx-background-radius: 25;">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgSendBtn" fitHeight="40.0" fitWidth="40.0" layoutX="64.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assests/icon/sendBtnIcon.png" />
                      </image>
                   </ImageView>
-                  <JFXButton layoutX="-3.0" layoutY="-4.0" onAction="#btnSendOnAction" prefHeight="73.0" prefWidth="167.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" " />
+                  <JFXButton layoutX="-3.0" layoutY="-4.0" onAction="#btnSendOnAction" onMouseEntered="#btnSendOnMouseEntered" onMouseExited="#btnSendOnMouseExited" prefHeight="73.0" prefWidth="167.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" text=" ">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                </children>
             </Pane>
          </children>
       </Pane>
-      <ImageView fitHeight="82.0" fitWidth="80.0" layoutX="325.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPlayTechLogo" fitHeight="82.0" fitWidth="80.0" layoutX="325.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/image/playTechLogoChatRoom.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="416.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayTech Chat Room">
+      <Text fx:id="txtLogoChatRoom" fill="WHITE" layoutX="416.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayTech Chat Room">
          <font>
             <Font name="Arial Bold" size="33.0" />
          </font>
       </Text>
-      <Circle fill="WHITE" layoutX="1052.0" layoutY="46.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="1052.0" layoutY="46.0" radius="27.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
-      <ImageView fitHeight="37.43" fitWidth="35.16" layoutX="1034.5" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assests/icon/exitBtnIcon.png" />
-         </image></ImageView>
-      <JFXButton layoutX="1025.0" layoutY="17.0" onAction="#btnExitOnAction" prefHeight="58.0" prefWidth="53.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
-      <ImageView fitHeight="28.39" fitWidth="15.96" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgBackIcon" fitHeight="28.39" fitWidth="15.96" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/icon/backBtnIcon.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="16.0" layoutY="22.0" onAction="#btnBackOnAction" prefHeight="58.0" prefWidth="40.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
-      <Pane layoutX="12.0" layoutY="106.0" prefHeight="615.0" prefWidth="1076.0" style="-fx-background-color: white; -fx-background-radius: 16;">
+      <JFXButton fx:id="backBtn" layoutX="16.0" layoutY="22.0" onAction="#btnBackOnAction" onMouseEntered="#btnBackOnMouseEntered" onMouseExited="#btnBackOnMouseExited" prefHeight="58.0" prefWidth="40.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <Pane fx:id="messageAreaPane" layoutX="12.0" layoutY="106.0" prefHeight="615.0" prefWidth="1076.0" style="-fx-background-color: white; -fx-background-radius: 16;">
          <children>
             <ScrollPane fx:id="scrollPane" layoutX="6.0" layoutY="4.0" prefHeight="608.0" prefWidth="1064.0" style="-fx-background-color: white; -fx-background-radius: 16; -fx-border-radius: 16;">
                <content>
@@ -88,7 +97,7 @@
             </ScrollPane>
          </children>
       </Pane>
-      <Circle fill="WHITE" layoutX="120.0" layoutY="51.0" radius="8.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: #009CFF;" />
+      <Circle fx:id="circleOnlineIndicator" fill="WHITE" layoutX="120.0" layoutY="51.0" radius="8.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: #009CFF;" />
       <Label fx:id="lblUsername" layoutX="133.0" layoutY="40.0" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
@@ -96,92 +105,92 @@
       </Label>
       <Pane fx:id="emojiPane" layoutX="19.0" layoutY="506.0" prefHeight="225.0" prefWidth="401.0" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-color: #009CFF; -fx-border-radius: 18;" visible="false">
          <children>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="26.0" onMouseClicked="#imgThumbUpEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgThumbUpEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="26.0" onMouseClicked="#imgThumbUpEmojiOnMouseClicked" onMouseEntered="#imgThumbUpEmojiOnMouseEntered" onMouseExited="#imgThumbUpEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/thumbUpEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="26.0" onMouseClicked="#imgSmilingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgSmilingFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="26.0" onMouseClicked="#imgSmilingFaceEmojiOnMouseClicked" onMouseEntered="#imgSmilingFaceEmojiOnMouseEntered" onMouseExited="#imgSmilingFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/smilingFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="26.0" onMouseClicked="#imgSmilingFaceWithSunglassesEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgSmilingFaceWithSunglassesEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="26.0" onMouseClicked="#imgSmilingFaceWithSunglassesEmojiOnMouseClicked" onMouseEntered="#imgSmilingFaceWithSunglassesEmojiOnMouseEntered" onMouseExited="#imgSmilingFaceWithSunglassesEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/smilingFaceWithSunglasses.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="26.0" onMouseClicked="#imgWinkingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgWinkingFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="26.0" onMouseClicked="#imgWinkingFaceEmojiOnMouseClicked" onMouseEntered="#imgWinkingFaceEmojiOnMouseEntered" onMouseExited="#imgWinkingFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/winkingFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="26.0" onMouseClicked="#imgLoveHeartsEyesEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLoveHeartsEyesEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="26.0" onMouseClicked="#imgLoveHeartsEyesEmojiOnMouseClicked" onMouseEntered="#imgLoveHeartsEyesEmojiOnMouseEntered" onMouseExited="#imgLoveHeartsEyesEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/loveHeartsEyesEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="26.0" onMouseClicked="#imgGrinningFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgGrinningFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="26.0" onMouseClicked="#imgGrinningFaceEmojiOnMouseClicked" onMouseEntered="#imgGrinningFaceEmojiOnMouseEntered" onMouseExited="#imgGrinningFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/grinningFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="94.0" onMouseClicked="#imgLoudlyCryingEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLoudlyCryingEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="94.0" onMouseClicked="#imgLoudlyCryingEmojiOnMouseClicked" onMouseEntered="#imgLoudlyCryingEmojiOnMouseEntered" onMouseExited="#imgLoudlyCryingEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/loudlyCryingEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="94.0" onMouseClicked="#imgAnxiousFaceWithSweatEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgAnxiousFaceWithSweatEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="94.0" onMouseClicked="#imgAnxiousFaceWithSweatEmojiOnMouseClicked" onMouseEntered="#imgAnxiousFaceWithSweatEmojiOnMouseEntered" onMouseExited="#imgAnxiousFaceWithSweatEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/anxiousFaceWithSweatEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="94.0" onMouseClicked="#imgFaceWithTongueEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFaceWithTongueEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="94.0" onMouseClicked="#imgFaceWithTongueEmojiOnMouseClicked" onMouseEntered="#imgFaceWithTongueEmojiOnMouseEntered" onMouseExited="#imgFaceWithTongueEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/faceWithTongueEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="94.0" onMouseClicked="#imgExpressionlessFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgExpressionlessFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="94.0" onMouseClicked="#imgExpressionlessFaceEmojiOnMouseClicked" onMouseEntered="#imgExpressionlessFaceEmojiOnMouseEntered" onMouseExited="#imgExpressionlessFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/expressionlessFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="94.0" onMouseClicked="#imgSmilingFaceWithHaloEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgSmilingFaceWithHaloEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="94.0" onMouseClicked="#imgSmilingFaceWithHaloEmojiOnMouseClicked" onMouseEntered="#imgSmilingFaceWithHaloEmojiOnMouseEntered" onMouseExited="#imgSmilingFaceWithHaloEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/smilingFaceWithHaloEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="94.0" onMouseClicked="#imgFaceWithTearsOfJoyEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFaceWithTearsOfJoyEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="94.0" onMouseClicked="#imgFaceWithTearsOfJoyEmojiOnMouseClicked" onMouseEntered="#imgFaceWithTearsOfJoyEmojiOnMouseEntered" onMouseExited="#imgFaceWithTearsOfJoyEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/faceWithTearsOfJoyEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="162.0" onMouseClicked="#imgDisappointedFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgDisappointedFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="19.0" layoutY="162.0" onMouseClicked="#imgDisappointedFaceEmojiOnMouseClicked" onMouseEntered="#imgDisappointedFaceEmojiOnMouseEntered" onMouseExited="#imgDisappointedFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/disappointedFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="162.0" onMouseClicked="#imgHushedFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgHushedFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="84.0" layoutY="162.0" onMouseClicked="#imgHushedFaceEmojiOnMouseClicked" onMouseEntered="#imgHushedFaceEmojiOnMouseEntered" onMouseExited="#imgHushedFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/hushedFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="162.0" onMouseClicked="#imgCryingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgCryingFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="149.0" layoutY="162.0" onMouseClicked="#imgCryingFaceEmojiOnMouseClicked" onMouseEntered="#imgCryingFaceEmojiOnMouseEntered" onMouseExited="#imgCryingFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/cryingFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="162.0" onMouseClicked="#imgSleepingFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgSleepingFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="214.0" layoutY="162.0" onMouseClicked="#imgSleepingFaceEmojiOnMouseClicked" onMouseEntered="#imgSleepingFaceEmojiOnMouseEntered" onMouseExited="#imgSleepingFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/sleepingFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="162.0" onMouseClicked="#imgFearfulFaceEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFearfulFaceEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="279.0" layoutY="162.0" onMouseClicked="#imgFearfulFaceEmojiOnMouseClicked" onMouseEntered="#imgFearfulFaceEmojiOnMouseEntered" onMouseExited="#imgFearfulFaceEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/fearfulFaceEmoji.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="162.0" onMouseClicked="#imgThumbsDownEmojiOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgThumbsDownEmoji" fitHeight="38.0" fitWidth="40.0" layoutX="344.0" layoutY="162.0" onMouseClicked="#imgThumbsDownEmojiOnMouseClicked" onMouseEntered="#imgThumbsDownEmojiOnMouseEntered" onMouseExited="#imgThumbsDownEmojiOnMouseExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assests/emoji/thumbsDownEmoji.png" />
                </image>
@@ -193,5 +202,74 @@
             <Font size="11.0" />
          </font>
       </Label>
+      <Circle fx:id="circleCloseIconOuter" fill="WHITE" layoutX="1076.0" layoutY="24.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="circleCloseIconInner" fill="WHITE" layoutX="1076.0" layoutY="24.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fx:id="imgCloseIcon" fitHeight="15.0" fitWidth="15.0" layoutX="1068.5" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/closeIcon.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="1060.0" layoutY="8.0" onAction="#btnExitOnAction" onMouseEntered="#btnExitOnMouseEntered" onMouseExited="#btnExitOnMouseExited" prefHeight="32.0" prefWidth="31.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <Circle fx:id="circleMinimizeIconOuter" fill="WHITE" layoutX="1038.0" layoutY="24.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="circleMinimizeIconInner" fill="WHITE" layoutX="1038.0" layoutY="24.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fx:id="imgMinimizeIcon" fitHeight="19.0" fitWidth="23.0" layoutX="1028.4" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/minimizeIcon.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="1022.0" layoutY="8.0" onAction="#btnMinimizeOnAction" onMouseEntered="#btnMinimizeOnMouseEntered" onMouseExited="#btnMinimizeOnMouseExited" prefHeight="32.0" prefWidth="31.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <Pane fx:id="exitBtnPane" layoutX="1016.0" layoutY="44.0" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Text fx:id="txtClose" fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="minimizeBtnPane" layoutX="961.0" layoutY="44.0" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Text fx:id="txtMinimize" fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimize">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="backBtnPane" layoutX="18.0" layoutY="83.0" prefHeight="20.0" prefWidth="68.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Text fx:id="txtBack" fill="#009cff" layoutX="20.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="themeChangePane" layoutX="755.0" layoutY="43.0" prefHeight="28.0" prefWidth="55.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Circle fx:id="circleDarkTheme" fill="#001f3f" layoutX="14.0" layoutY="14.0" radius="11.0" stroke="#001f3f" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circleLightTheme" fill="DODGERBLUE" layoutX="42.0" layoutY="14.0" radius="11.0" stroke="DODGERBLUE" strokeType="INSIDE" />
+            <ImageView fx:id="imgDarkTheme" fitHeight="18.0" fitWidth="18.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/nightThemeIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgLightTheme" fitHeight="18.0" fitWidth="20.0" layoutX="33.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/lightThemeIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton layoutX="755.0" layoutY="43.0" onAction="#themeChangeBtnOnAction" prefHeight="28.0" prefWidth="55.0" style="-fx-background-radius: 25;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </AnchorPane>

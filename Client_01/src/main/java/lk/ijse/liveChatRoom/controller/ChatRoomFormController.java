@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.shape.Circle;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -34,6 +35,48 @@ import java.util.Base64;
 import java.util.regex.Pattern;
 
 public class ChatRoomFormController {
+
+    @FXML
+    private Circle circleCloseIconInner;
+
+    @FXML
+    private Circle circleCloseIconOuter;
+
+    @FXML
+    private Circle circleMinimizeIconInner;
+
+    @FXML
+    private Circle circleMinimizeIconOuter;
+
+    @FXML
+    private Circle circleOnlineIndicator;
+
+    @FXML
+    private Circle circleDarkTheme;
+
+    @FXML
+    private Circle circleLightTheme;
+
+    @FXML
+    private ImageView imgBackIcon;
+
+    @FXML
+    private ImageView imgCloseIcon;
+
+    @FXML
+    private ImageView imgMinimizeIcon;
+
+    @FXML
+    private ImageView imgDarkTheme;
+
+    @FXML
+    private ImageView imgLightTheme;
+
+    @FXML
+    private ImageView imgPlayTechLogo;
+
+    @FXML
+    private ImageView imgChatRoomBackground;
 
     @FXML
     private ImageView imgSendBtn;
@@ -102,6 +145,9 @@ public class ChatRoomFormController {
     private JFXButton backBtn;
 
     @FXML
+    private Pane themeChangePane;
+
+    @FXML
     private Pane txtMessagePane;
 
     @FXML
@@ -109,6 +155,9 @@ public class ChatRoomFormController {
 
     @FXML
     private Pane sendBtnInnerPane;
+
+    @FXML
+    private Pane sendBtnOuterPane;
 
     @FXML
     private Pane emojiPane;
@@ -133,6 +182,18 @@ public class ChatRoomFormController {
 
     @FXML
     private TextField txtMessage;
+
+    @FXML
+    private Text txtBack;
+
+    @FXML
+    private Text txtClose;
+
+    @FXML
+    private Text txtMinimize;
+
+    @FXML
+    private Text txtLogoChatRoom;
 
     @FXML
     private VBox vBox;
@@ -311,10 +372,17 @@ public class ChatRoomFormController {
                 }
             }
 
-            innerHBox.setStyle(
-                    "-fx-background-color: rgb(15,125,242);" +
-                            "-fx-background-radius: 20px"
-            );
+            if (circleLightTheme.isVisible()) {
+                innerHBox.setStyle(
+                        "-fx-background-color: rgb(15,125,242);" +
+                                "-fx-background-radius: 20px"
+                );
+            } else {
+                innerHBox.setStyle(
+                        "-fx-background-color: rgb(8, 78, 153);" +
+                                "-fx-background-radius: 20px"
+                );
+            }
 
             innerHBox.getChildren().addAll(imageBox,timeBox);
 
@@ -325,10 +393,17 @@ public class ChatRoomFormController {
 
         //if received Image selected by another client
         else {
-            innerHBox.setStyle(
-                    "-fx-background-color: rgb(233,233,235);" +
-                            "-fx-background-radius: 20px"
-            );
+            if (circleLightTheme.isVisible()) {
+                innerHBox.setStyle(
+                        "-fx-background-color: rgb(233,233,235);" +
+                                "-fx-background-radius: 20px"
+                );
+            } else {
+                innerHBox.setStyle(
+                        "-fx-background-color: #A9A9A9;" +
+                                "-fx-background-radius: 20px"
+                );
+            }
 
             vBox.setAlignment(Pos.TOP_LEFT);
             hBox.setAlignment(Pos.TOP_LEFT);
@@ -341,8 +416,11 @@ public class ChatRoomFormController {
             hBox.setPadding(new Insets(5,5,5,10));
         }
 
-        Platform.runLater(() ->
-                vBox.getChildren().addAll(hBox));
+        Platform.runLater(() -> {
+                vBox.getChildren().add(hBox);
+                scrollPane.layout(); // Ensure layout is updated
+                scrollPane.setVvalue(1.0); // Scroll down to the bottom
+        });
     }
 
     private void sendMessage(String messageToSend) {
@@ -359,10 +437,17 @@ public class ChatRoomFormController {
             text.setFont(Font.font(17));
             TextFlow textFlow = new TextFlow(text);
 
-            innerHBox.setStyle(
-                    "-fx-background-color: rgb(15,125,242);" +
-                    "-fx-background-radius: 20px"
-            );
+            if (circleLightTheme.isVisible()) {
+                innerHBox.setStyle(
+                        "-fx-background-color: rgb(15,125,242);" +
+                                "-fx-background-radius: 20px"
+                );
+            } else {
+                innerHBox.setStyle(
+                        "-fx-background-color: rgb(8, 78, 153);" +
+                                "-fx-background-radius: 20px"
+                );
+            }
 
             textFlow.setPadding(new Insets(5,10,5,10));
             text.setFill(Color.color(0.934, 0.945, 0.996));
@@ -384,6 +469,8 @@ public class ChatRoomFormController {
                 @Override
                 public void run() {
                     vBox.getChildren().add(hBox);
+                    scrollPane.layout(); // Ensure layout is updated
+                    scrollPane.setVvalue(1.0); // Scroll down to the bottom
                 }
             });
         }
@@ -411,10 +498,17 @@ public class ChatRoomFormController {
 
             TextFlow textFlow = new TextFlow(txtUsername, txtMessage);
 
-            innerHBox.setStyle(
-                    "-fx-background-color: rgb(233,233,235);" +
-                    "-fx-background-radius: 20px"
-            );
+            if (circleLightTheme.isVisible()) {
+                innerHBox.setStyle(
+                        "-fx-background-color: rgb(233,233,235);" +
+                                "-fx-background-radius: 20px"
+                );
+            } else {
+                innerHBox.setStyle(
+                        "-fx-background-color: #A9A9A9;" +
+                                "-fx-background-radius: 20px"
+                );
+            }
 
             textFlow.setPadding(new Insets(5,10,5,10));
 
@@ -424,11 +518,10 @@ public class ChatRoomFormController {
             innerHBox.getChildren().addAll(textFlow, timeBox);
             hBox.getChildren().add(innerHBox);
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    vBox.getChildren().add(hBox);
-                }
+            Platform.runLater(() -> {
+                vBox.getChildren().add(hBox);
+                scrollPane.layout();
+                scrollPane.setVvalue(1.0);
             });
         }
     }
@@ -533,10 +626,17 @@ public class ChatRoomFormController {
     void btnBackOnMouseEntered(MouseEvent event) {
         backBtnPane.setVisible(true);
         TransitionUtil.ScaleTransition(backBtnPane);
-        backBtn.setStyle(
-                "-fx-border-color: white;" +
-                "-fx-border-width: 3px;" +
-                "-fx-border-radius: 50px");
+        if (circleLightTheme.isVisible()) {
+            backBtn.setStyle(
+                    "-fx-border-color: white;" +
+                            "-fx-border-width: 3px;" +
+                            "-fx-border-radius: 50px");
+        } else {
+            backBtn.setStyle(
+                    "-fx-border-color: #CBCBCB;" +
+                            "-fx-border-width: 3px;" +
+                            "-fx-border-radius: 50px");
+        }
     }
 
     @FXML
@@ -556,6 +656,7 @@ public class ChatRoomFormController {
             }
             txtMessage.setEditable(true);
             emojiPane.setVisible(false);
+            imgEmojiIcon.setImage(new Image("assests/icon/emojiIcon.png"));
             txtMessage.clear();
         }
         else {
@@ -570,17 +671,29 @@ public class ChatRoomFormController {
     @FXML
     void btnSendOnMouseEntered(MouseEvent event) {
         TransitionUtil.ScaleTransition(imgSendBtn, 1.1);
-        sendBtnInnerPane.setStyle(
-                "-fx-background-color: #018DE7;" +
-                        "-fx-background-radius: 25px");
+        if (circleLightTheme.isVisible()) {
+            sendBtnInnerPane.setStyle(
+                    "-fx-background-color: #018DE7;" +
+                            "-fx-background-radius: 25px");
+        } else {
+            sendBtnInnerPane.setStyle(
+                    "-fx-background-color: #001727;" +
+                            "-fx-background-radius: 25px");
+        }
     }
 
     @FXML
     void btnSendOnMouseExited(MouseEvent event) {
         TransitionUtil.ScaleTransition(imgSendBtn, 1.0);
-        sendBtnInnerPane.setStyle(
-                "-fx-background-color: #009CFF;" +
-                        "-fx-background-radius: 25px");
+        if (circleLightTheme.isVisible()) {
+            sendBtnInnerPane.setStyle(
+                    "-fx-background-color: #009CFF;" +
+                            "-fx-background-radius: 25px");
+        } else {
+            sendBtnInnerPane.setStyle(
+                    "-fx-background-color: #001F3F;" +
+                            "-fx-background-radius: 25px");
+        }
     }
 
     @FXML
@@ -889,35 +1002,149 @@ public class ChatRoomFormController {
         TransitionUtil.ScaleTransition(imgWinkingFaceEmoji, 1.0);
     }
 
-    /*private void changeTheme() {
-        if ()
-        vBox.setStyle();
-        scrollPane.setStyle();
-        messageAreaPane.setStyle();
+    private void setLightTheme() {
+        imgChatRoomBackground.setImage(new Image("assests/image/chatRoomBackground.png"));
+        imgPlayTechLogo.setImage(new Image("assests/image/playTechLogoChatRoom.png"));
+        imgDarkTheme.setImage(new Image("assests/icon/nightThemeIcon.png"));
+        imgLightTheme.setImage(new Image("assests/icon/lightThemeIcon.png"));
+        imgSendBtn.setImage(new Image("assests/icon/sendBtnIcon.png"));
+        imgEmojiIcon.setImage(new Image("assests/icon/emojiIcon.png"));
+        imgCloseIcon.setImage(new Image("assests/icon/closeIcon.png"));
+        imgMinimizeIcon.setImage(new Image("assests/icon/minimizeIcon.png"));
+        imgBackIcon.setImage(new Image("assests/icon/backBtnIcon.png"));
 
-        txtMessage.setStyle();
-        txtMessagePane.setStyle();
+        themeChangePane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 25px");
+
+        txtLogoChatRoom.setStyle("-fx-fill: white");
+        lblUsername.setStyle("-fx-text-fill: white");
+        circleOnlineIndicator.setStyle("-fx-fill:  #009CFF;" +
+                "-fx-stroke: white;" +
+                "-fx-stroke-width: 3px");
+
+        vBox.setStyle("-fx-background-color: white");
+        scrollPane.setStyle("-fx-background-color: white");
+        messageAreaPane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 16px");
+
+        txtMessage.setStyle("-fx-background-color: white");
+        txtMessagePane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 25px");
+
+        sendBtnInnerPane.setStyle("-fx-background-color: #009CFF;" +
+                "-fx-background-radius: 25px");
+        sendBtnOuterPane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 25px");
+
+        emojiPane.setStyle("-fx-background-color: white;" +
+                "-fx-border-color:  #009CFF;" +
+                "-fx-background-radius: 18px;" +
+                "-fx-border-radius: 18px");
+
+        circleCloseIconOuter.setStyle("-fx-fill: white");
+        circleCloseIconInner.setStyle("-fx-fill: #009CFF;" +
+                "-fx-stroke: #009CFF");
+
+        circleMinimizeIconOuter.setStyle("-fx-fill: white");
+        circleMinimizeIconInner.setStyle("-fx-fill: #009CFF;" +
+                "-fx-stroke: #009CFF");
+
+        backBtnPane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 20px");
+        exitBtnPane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 20px");
+        minimizeBtnPane.setStyle("-fx-background-color: white;" +
+                "-fx-background-radius: 20px");
+
+        txtBack.setStyle("-fx-fill: #009CFF");
+        txtClose.setStyle("-fx-fill: #009CFF");
+        txtMinimize.setStyle("-fx-fill: #009CFF");
+
+        emojiPane.setVisible(false);
+        circleDarkTheme.setVisible(false);
+        circleLightTheme.setVisible(true);
+    }
+
+    private void setDarkTheme() {
+        imgChatRoomBackground.setImage(new Image("assests/image/chatRoomBackgroundDark.png"));
+        imgPlayTechLogo.setImage(new Image("assests/image/playTechLogoChatRoomDark.png"));
+        imgDarkTheme.setImage(new Image("assests/icon/nightThemeIconSilver.png"));
+        imgLightTheme.setImage(new Image("assests/icon/lightThemeIconSilver.png"));
+        imgSendBtn.setImage(new Image("assests/icon/sendBtnIconSilver.png"));
+        imgEmojiIcon.setImage(new Image("assests/icon/emojiIcon.png"));
+        imgCloseIcon.setImage(new Image("assests/icon/closeIconSilver.png"));
+        imgMinimizeIcon.setImage(new Image("assests/icon/minimizeIconSilver.png"));
+        imgBackIcon.setImage(new Image("assests/icon/backBtnIconSilver.png"));
+
+        themeChangePane.setStyle("-fx-background-color: #A9A9A9;" +
+                "-fx-background-radius: 25px");
+
+        txtLogoChatRoom.setStyle("-fx-fill: #A9A9A9");
+        lblUsername.setStyle("-fx-text-fill: #cbcbcb");
+        circleOnlineIndicator.setStyle("-fx-fill:  #001F3F;" +
+                "-fx-stroke: #cbcbcb;" +
+                "-fx-stroke-width: 3px");
+
+        vBox.setStyle("-fx-background-color: #001F3F");
+        scrollPane.setStyle("-fx-background-color: #001F3F;" +
+                "-fx-control-inner-background: #001F3F;" +
+                "-fx-background: #001F3F;");
+
+        messageAreaPane.setStyle("-fx-background-color: #001F3F;" +
+                "-fx-background-radius: 16px");
+
+        txtMessage.setStyle("-fx-background-color: #001F3F;" +
+                "-fx-control-inner-background: #F0F0F0;" +
+                "-fx-background: #001F3F;" +
+                "-fx-text-fill: #F0F0F0;");
+
+        txtMessagePane.setStyle("-fx-background-color: #001F3F;" +
+                "-fx-background-radius: 25px");
+
+        sendBtnInnerPane.setStyle("-fx-background-color: #001F3F;" +
+                "-fx-background-radius: 25px");
+        sendBtnOuterPane.setStyle("-fx-background-color: #A9A9A9;" +
+                "-fx-background-radius: 25px");
+
+        emojiPane.setStyle("-fx-background-color: #001F3F;" +
+                "-fx-border-color:  #A9A9A9;" +
+                "-fx-background-radius: 18px;" +
+                "-fx-border-radius: 18px");
+
+        circleCloseIconOuter.setStyle("-fx-fill: #A9A9A9");
+        circleCloseIconInner.setStyle("-fx-fill: #001F3F;" +
+                "-fx-stroke: #001F3F");
+
+        circleMinimizeIconOuter.setStyle("-fx-fill: #A9A9A9");
+        circleMinimizeIconInner.setStyle("-fx-fill: #001F3F;" +
+                "-fx-stroke: #001F3F");
+
+        backBtnPane.setStyle("-fx-background-color: #CBCBCB;" +
+                "-fx-background-radius: 20px");
+        exitBtnPane.setStyle("-fx-background-color: #CBCBCB;" +
+                "-fx-background-radius: 20px");
+        minimizeBtnPane.setStyle("-fx-background-color: #CBCBCB;" +
+                "-fx-background-radius: 20px");
+
+        txtBack.setStyle("-fx-fill: #001F3F");
+        txtClose.setStyle("-fx-fill: #001F3F");
+        txtMinimize.setStyle("-fx-fill: #001F3F");
+
+        emojiPane.setVisible(false);
+        circleLightTheme.setVisible(false);
+        circleDarkTheme.setVisible(true);
+    }
+
+    private void changeTheme() {
+        if (circleLightTheme.isVisible()) {
+            setDarkTheme();
+        } else {
+            setLightTheme();
+        }
     }
 
     @FXML
     void themeChangeBtnOnAction(ActionEvent event) {
         changeTheme();
     }
-
-    @FXML
-    void themeViewOnAction(MouseEvent event) {
-        if(themeView.getImage().getUrl().equals(new Image("img/light.png").getUrl())){
-            root.setStyle("-fx-background-color: #fefae0;");
-            textArea.getStyleClass().removeAll("dark-text");
-            textArea.getStyleClass().add("light-text");
-            header.setStyle("-fx-background-color: #2a9a84;");
-            themeView.setImage(new Image("img/dark.png"));
-        }else{
-            root.setStyle("-fx-background-color:  #2f3e46;");
-            textArea.getStyleClass().removeAll("light-text");
-            textArea.getStyleClass().add("dark-text");
-            header.setStyle("-fx-background-color: transparent;");
-            themeView.setImage(new Image("img/light.png"));;
-        }
-    }*/
 }

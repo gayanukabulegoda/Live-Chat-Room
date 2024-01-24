@@ -16,7 +16,7 @@
 
 <AnchorPane id="background" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.liveChatRoom.controller.ChatRoomFormController">
    <children>
-      <ImageView fitHeight="850.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgChatRoomBackground" fitHeight="850.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/image/chatRoomBackground.png" />
          </image>
@@ -52,7 +52,7 @@
                </cursor></JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="919.0" layoutY="745.0" prefHeight="72.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <Pane fx:id="sendBtnOuterPane" layoutX="919.0" layoutY="745.0" prefHeight="72.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
             <Pane fx:id="sendBtnInnerPane" layoutX="4.0" layoutY="4.0" prefHeight="64.0" prefWidth="160.0" style="-fx-background-color: #009CFF; -fx-background-radius: 25;">
                <children>
@@ -69,17 +69,17 @@
             </Pane>
          </children>
       </Pane>
-      <ImageView fitHeight="82.0" fitWidth="80.0" layoutX="325.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPlayTechLogo" fitHeight="82.0" fitWidth="80.0" layoutX="325.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/image/playTechLogoChatRoom.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="416.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayTech Chat Room">
+      <Text fx:id="txtLogoChatRoom" fill="WHITE" layoutX="416.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayTech Chat Room">
          <font>
             <Font name="Arial Bold" size="33.0" />
          </font>
       </Text>
-      <ImageView fitHeight="28.39" fitWidth="15.96" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgBackIcon" fitHeight="28.39" fitWidth="15.96" layoutX="27.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/icon/backBtnIcon.png" />
          </image>
@@ -97,7 +97,7 @@
             </ScrollPane>
          </children>
       </Pane>
-      <Circle fill="WHITE" layoutX="120.0" layoutY="51.0" radius="8.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: #009CFF;" />
+      <Circle fx:id="circleOnlineIndicator" fill="WHITE" layoutX="120.0" layoutY="51.0" radius="8.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" style="-fx-fill: #009CFF;" />
       <Label fx:id="lblUsername" layoutX="133.0" layoutY="40.0" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
@@ -202,9 +202,9 @@
             <Font size="11.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="1076.0" layoutY="24.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="1076.0" layoutY="24.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
-      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="1068.5" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+      <Circle fx:id="circleCloseIconOuter" fill="WHITE" layoutX="1076.0" layoutY="24.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="circleCloseIconInner" fill="WHITE" layoutX="1076.0" layoutY="24.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fx:id="imgCloseIcon" fitHeight="15.0" fitWidth="15.0" layoutX="1068.5" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/icon/closeIcon.png" />
          </image>
@@ -213,9 +213,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
-      <Circle fill="WHITE" layoutX="1038.0" layoutY="24.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="1038.0" layoutY="24.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
-      <ImageView fitHeight="19.0" fitWidth="23.0" layoutX="1028.4" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+      <Circle fx:id="circleMinimizeIconOuter" fill="WHITE" layoutX="1038.0" layoutY="24.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="circleMinimizeIconInner" fill="WHITE" layoutX="1038.0" layoutY="24.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fx:id="imgMinimizeIcon" fitHeight="19.0" fitWidth="23.0" layoutX="1028.4" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assests/icon/minimizeIcon.png" />
          </image>
@@ -226,7 +226,7 @@
          </cursor></JFXButton>
       <Pane fx:id="exitBtnPane" layoutX="1016.0" layoutY="44.0" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
          <children>
-            <Text fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close">
+            <Text fx:id="txtClose" fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -235,7 +235,7 @@
       </Pane>
       <Pane fx:id="minimizeBtnPane" layoutX="961.0" layoutY="44.0" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
          <children>
-            <Text fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimize">
+            <Text fx:id="txtMinimize" fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimize">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -244,13 +244,32 @@
       </Pane>
       <Pane fx:id="backBtnPane" layoutX="18.0" layoutY="83.0" prefHeight="20.0" prefWidth="68.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
          <children>
-            <Text fill="#009cff" layoutX="20.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back">
+            <Text fx:id="txtBack" fill="#009cff" layoutX="20.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <JFXButton layoutX="777.0" layoutY="32.0" onAction="#themeChangeBtnOnAction" text="Button" />
+      <Pane fx:id="themeChangePane" layoutX="755.0" layoutY="43.0" prefHeight="28.0" prefWidth="55.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Circle fx:id="circleDarkTheme" fill="#001f3f" layoutX="14.0" layoutY="14.0" radius="11.0" stroke="#001f3f" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circleLightTheme" fill="DODGERBLUE" layoutX="42.0" layoutY="14.0" radius="11.0" stroke="DODGERBLUE" strokeType="INSIDE" />
+            <ImageView fx:id="imgDarkTheme" fitHeight="18.0" fitWidth="18.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/nightThemeIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgLightTheme" fitHeight="18.0" fitWidth="20.0" layoutX="33.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icon/lightThemeIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton layoutX="755.0" layoutY="43.0" onAction="#themeChangeBtnOnAction" prefHeight="28.0" prefWidth="55.0" style="-fx-background-radius: 25;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </AnchorPane>

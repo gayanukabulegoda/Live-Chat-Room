@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -19,19 +20,25 @@
             <Image url="@../assests/image/signInFormBackground.png" />
          </image>
       </ImageView>
-      <Circle fill="WHITE" layoutX="867.0" layoutY="33.0" radius="22.5" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="867.0" layoutY="33.0" radius="19.5" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
-      <ImageView fitHeight="27.85" fitWidth="26.16" layoutX="854.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+      <Circle fill="WHITE" layoutX="876.0" layoutY="25.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="876.0" layoutY="25.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="868.5" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assests/icon/exitBtnIcon.png" />
+            <Image url="@../assests/icon/closeIcon.png" />
          </image>
       </ImageView>
       <JFXButton layoutX="-40.0" layoutY="-2.0" text=" " />
-      <JFXButton layoutX="845.0" layoutY="9.0" onAction="#btnExitOnAction" prefHeight="48.0" prefWidth="43.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" " />
+      <JFXButton layoutX="860.0" layoutY="9.0" onAction="#btnExitOnAction" onMouseEntered="#btnExitOnMouseEntered" onMouseExited="#btnExitOnMouseExited" prefHeight="32.0" prefWidth="31.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <TextField fx:id="txtUserName" layoutX="187.0" layoutY="279.0" onAction="#txtUserNameOnAction" onKeyPressed="#txtUserNameOnKeyPressed" prefHeight="35.0" prefWidth="218.0" promptText="     Enter Username" style="-fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18;">
          <font>
             <Font size="15.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
       </TextField>
       <Text fill="#009cff" layoutX="751.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" visible="false">
          <font>
@@ -54,7 +61,7 @@
             <Font name="Arial Bold" size="35.0" />
          </font>
       </Text>
-      <Pane layoutX="128.0" layoutY="387.0" prefHeight="40.0" prefWidth="263.0" style="-fx-background-color: #009CFF; -fx-background-radius: 15;">
+      <Pane fx:id="signInBtnPane" layoutX="128.0" layoutY="387.0" prefHeight="40.0" prefWidth="263.0" style="-fx-background-color: #009CFF; -fx-background-radius: 15;">
          <children>
             <Text fill="WHITE" layoutX="104.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
                <font>
@@ -63,7 +70,10 @@
             </Text>
          </children>
       </Pane>
-      <JFXButton layoutX="128.0" layoutY="387.0" onAction="#signInBtnOnAction" prefHeight="40.0" prefWidth="263.0" style="-fx-background-radius: 15;" text=" " />
+      <JFXButton layoutX="128.0" layoutY="387.0" onAction="#signInBtnOnAction" onMouseEntered="#signInBtnOnMouseEntered" onMouseExited="#signInBtnOnMouseExited" prefHeight="40.0" prefWidth="263.0" style="-fx-background-radius: 15;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <Label fx:id="lblUserNameAlert" layoutX="170.0" layoutY="320.0" textFill="RED">
          <font>
             <Font size="11.0" />
@@ -85,5 +95,35 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Circle fill="WHITE" layoutX="838.0" layoutY="25.0" radius="15.5" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="WHITE" layoutX="838.0" layoutY="25.0" radius="13.0" stroke="#009cff" strokeType="INSIDE" style="-fx-fill: #009CFF;" />
+      <ImageView fitHeight="19.0" fitWidth="23.0" layoutX="828.4" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/icon/minimizeIcon.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="822.0" layoutY="9.0" onAction="#btnMinimizeOnAction" onMouseEntered="#btnMinimizeOnMouseEntered" onMouseExited="#btnMinimizeOnMouseExited" prefHeight="32.0" prefWidth="31.0" style="-fx-background-radius: 25; -fx-border-radius: 100;" text=" ">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Pane fx:id="exitBtnPane" layoutX="817.0" layoutY="46.0" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Text fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Close">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="minimizeBtnPane" layoutX="761.0" layoutY="46.0" prefHeight="26.0" prefWidth="95.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+         <children>
+            <Text fill="#009cff" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimize">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
