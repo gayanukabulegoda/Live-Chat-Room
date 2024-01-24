@@ -1,5 +1,6 @@
 package lk.ijse.liveChatRoom.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,8 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
-import lk.ijse.liveChatRoom.util.Navigation;
+import lk.ijse.liveChatRoom.util.NavigationUtil;
+import lk.ijse.liveChatRoom.util.TransitionUtil;
 
 import java.io.*;
 import java.net.Socket;
@@ -34,7 +36,91 @@ import java.util.regex.Pattern;
 public class ChatRoomFormController {
 
     @FXML
+    private ImageView imgSendBtn;
+
+    @FXML
+    private ImageView imgAttachIcon;
+
+    @FXML
+    private ImageView imgEmojiIcon;
+
+    @FXML
+    private ImageView imgAnxiousFaceWithSweatEmoji;
+
+    @FXML
+    private ImageView imgCryingFaceEmoji;
+
+    @FXML
+    private ImageView imgDisappointedFaceEmoji;
+
+    @FXML
+    private ImageView imgExpressionlessFaceEmoji;
+
+    @FXML
+    private ImageView imgFaceWithTearsOfJoyEmoji;
+
+    @FXML
+    private ImageView imgFaceWithTongueEmoji;
+
+    @FXML
+    private ImageView imgFearfulFaceEmoji;
+
+    @FXML
+    private ImageView imgGrinningFaceEmoji;
+
+    @FXML
+    private ImageView imgHushedFaceEmoji;
+
+    @FXML
+    private ImageView imgLoudlyCryingEmoji;
+
+    @FXML
+    private ImageView imgLoveHeartsEyesEmoji;
+
+    @FXML
+    private ImageView imgSleepingFaceEmoji;
+
+    @FXML
+    private ImageView imgSmilingFaceEmoji;
+
+    @FXML
+    private ImageView imgSmilingFaceWithHaloEmoji;
+
+    @FXML
+    private ImageView imgSmilingFaceWithSunglassesEmoji;
+
+    @FXML
+    private ImageView imgThumbUpEmoji;
+
+    @FXML
+    private ImageView imgThumbsDownEmoji;
+
+    @FXML
+    private ImageView imgWinkingFaceEmoji;
+
+    @FXML
+    private JFXButton backBtn;
+
+    @FXML
+    private Pane txtMessagePane;
+
+    @FXML
+    private Pane messageAreaPane;
+
+    @FXML
+    private Pane sendBtnInnerPane;
+
+    @FXML
     private Pane emojiPane;
+
+    @FXML
+    private Pane exitBtnPane;
+
+    @FXML
+    private Pane backBtnPane;
+
+    @FXML
+    private Pane minimizeBtnPane;
 
     @FXML
     private Label lblUsername;
@@ -368,24 +454,95 @@ public class ChatRoomFormController {
             base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
             btnSendOnAction(event);
+            imgAttachIcon.setImage(new Image("assests/icon/attachmentIcon.png"));
         }
+    }
+
+    @FXML
+    void btnAttachOnMouseEntered(MouseEvent event) {
+        imgAttachIcon.setImage(new Image("assests/icon/attachmentIconBlue.png"));
+    }
+
+    @FXML
+    void btnAttachOnMouseExited(MouseEvent event) {
+        imgAttachIcon.setImage(new Image("assests/icon/attachmentIcon.png"));
     }
 
     @FXML
     void btnEmojiOnAction(ActionEvent event) {
         lblMessageTextAlert.setText(" ");
         emojiPane.setVisible(!emojiPane.isVisible());
+        if (emojiPane.isVisible()) {
+            imgEmojiIcon.setImage(new Image("assests/icon/emojiIconBlue.png"));
+        } else {
+            imgEmojiIcon.setImage(new Image("assests/icon/emojiIcon.png"));
+        }
+    }
+
+    @FXML
+    void btnEmojiOnMouseEntered(MouseEvent event) {
+        imgEmojiIcon.setImage(new Image("assests/icon/emojiIconBlue.png"));
+    }
+
+    @FXML
+    void btnEmojiOnMouseExited(MouseEvent event) {
+        if (!emojiPane.isVisible()) {
+            imgEmojiIcon.setImage(new Image("assests/icon/emojiIcon.png"));
+        }
     }
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
-        Navigation.switchNavigation("loginForm.fxml",event);
+        NavigationUtil.switchNavigation("loginForm.fxml",event);
     }
 
     @FXML
     void btnExitOnAction(ActionEvent event) {
         printWriter.println("lef" + lblUsername.getText() + ": leaving");
-        Navigation.exit();
+        NavigationUtil.exit();
+    }
+
+    @FXML
+    void btnMinimizeOnAction(ActionEvent event) {
+        NavigationUtil.minimize();
+    }
+
+    @FXML
+    void btnExitOnMouseEntered(MouseEvent event) {
+        exitBtnPane.setVisible(true);
+        TransitionUtil.ScaleTransition(exitBtnPane);
+    }
+
+    @FXML
+    void btnExitOnMouseExited(MouseEvent event) {
+        exitBtnPane.setVisible(false);
+    }
+
+    @FXML
+    void btnMinimizeOnMouseEntered(MouseEvent event) {
+        minimizeBtnPane.setVisible(true);
+        TransitionUtil.ScaleTransition(minimizeBtnPane);
+    }
+
+    @FXML
+    void btnMinimizeOnMouseExited(MouseEvent event) {
+        minimizeBtnPane.setVisible(false);
+    }
+
+    @FXML
+    void btnBackOnMouseEntered(MouseEvent event) {
+        backBtnPane.setVisible(true);
+        TransitionUtil.ScaleTransition(backBtnPane);
+        backBtn.setStyle(
+                "-fx-border-color: white;" +
+                "-fx-border-width: 3px;" +
+                "-fx-border-radius: 50px");
+    }
+
+    @FXML
+    void btnBackOnMouseExited(MouseEvent event) {
+        backBtn.setStyle("-fx-border-color: transparent");
+        backBtnPane.setVisible(false);
     }
 
     @FXML
@@ -411,6 +568,22 @@ public class ChatRoomFormController {
     }
 
     @FXML
+    void btnSendOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSendBtn, 1.1);
+        sendBtnInnerPane.setStyle(
+                "-fx-background-color: #018DE7;" +
+                        "-fx-background-radius: 25px");
+    }
+
+    @FXML
+    void btnSendOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSendBtn, 1.0);
+        sendBtnInnerPane.setStyle(
+                "-fx-background-color: #009CFF;" +
+                        "-fx-background-radius: 25px");
+    }
+
+    @FXML
     void txtMessageOnAction(ActionEvent event) {
         btnSendOnAction(event);
     }
@@ -425,126 +598,326 @@ public class ChatRoomFormController {
     @FXML
     void imgAnxiousFaceWithSweatEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE30"); //😰
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgCryingFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE22"); //😢
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgDisappointedFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE1E"); //😞
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgFaceWithTearsOfJoyEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE02"); //😂
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgFaceWithTongueEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE1B"); //😛
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgFearfulFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE28"); //😦
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgGrinningFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE00"); //😀
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgHushedFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE2F"); //😯
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgLoudlyCryingEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE2D"); //😭
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgLoveHeartsEyesEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE0D"); //😍
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgExpressionlessFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE11"); //😑
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgSleepingFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE34"); //😴
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgSmilingFaceWithSunglassesEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE0E"); //😎
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgSmilingFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE0A"); //😊
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgSmilingFaceWithHaloEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE07"); //😇
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgThumbsDownEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDC4E"); //👎
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgThumbUpEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDC4D"); //👍
-        emojiPane.setVisible(false);
-        txtMessage.requestFocus();
+        finalizeEmojiSelection(event);
     }
 
     @FXML
     void imgWinkingFaceEmojiOnMouseClicked(MouseEvent event) {
         txtMessage.appendText("\uD83D\uDE09"); //😉
+        finalizeEmojiSelection(event);
+    }
+
+    private void finalizeEmojiSelection(MouseEvent event) {
         emojiPane.setVisible(false);
+        btnEmojiOnMouseExited(event);
         txtMessage.requestFocus();
     }
+
+    @FXML
+    void imgAnxiousFaceWithSweatEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgAnxiousFaceWithSweatEmoji, 1.2);
+    }
+
+    @FXML
+    void imgAnxiousFaceWithSweatEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgAnxiousFaceWithSweatEmoji, 1.0);
+    }
+
+    @FXML
+    void imgCryingFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgCryingFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgCryingFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgCryingFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgDisappointedFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgDisappointedFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgDisappointedFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgDisappointedFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgExpressionlessFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgExpressionlessFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgExpressionlessFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgExpressionlessFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgFaceWithTearsOfJoyEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgFaceWithTearsOfJoyEmoji, 1.2);
+    }
+
+    @FXML
+    void imgFaceWithTearsOfJoyEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgFaceWithTearsOfJoyEmoji, 1.0);
+    }
+
+    @FXML
+    void imgFaceWithTongueEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgFaceWithTongueEmoji, 1.2);
+    }
+
+    @FXML
+    void imgFaceWithTongueEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgFaceWithTongueEmoji, 1.0);
+    }
+
+    @FXML
+    void imgFearfulFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgFearfulFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgFearfulFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgFearfulFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgGrinningFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgGrinningFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgGrinningFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgGrinningFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgHushedFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgHushedFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgHushedFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgHushedFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgLoudlyCryingEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgLoudlyCryingEmoji, 1.2);
+    }
+
+    @FXML
+    void imgLoudlyCryingEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgLoudlyCryingEmoji, 1.0);
+    }
+
+    @FXML
+    void imgLoveHeartsEyesEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgLoveHeartsEyesEmoji, 1.2);
+    }
+
+    @FXML
+    void imgLoveHeartsEyesEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgLoveHeartsEyesEmoji, 1.0);
+    }
+
+    @FXML
+    void imgSleepingFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSleepingFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgSleepingFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSleepingFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgSmilingFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSmilingFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgSmilingFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSmilingFaceEmoji, 1.0);
+    }
+
+    @FXML
+    void imgSmilingFaceWithHaloEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSmilingFaceWithHaloEmoji, 1.2);
+    }
+
+    @FXML
+    void imgSmilingFaceWithHaloEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSmilingFaceWithHaloEmoji, 1.0);
+    }
+
+    @FXML
+    void imgSmilingFaceWithSunglassesEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSmilingFaceWithSunglassesEmoji, 1.2);
+    }
+
+    @FXML
+    void imgSmilingFaceWithSunglassesEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgSmilingFaceWithSunglassesEmoji, 1.0);
+    }
+
+    @FXML
+    void imgThumbUpEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgThumbUpEmoji, 1.2);
+    }
+
+    @FXML
+    void imgThumbUpEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgThumbUpEmoji, 1.0);
+    }
+
+    @FXML
+    void imgThumbsDownEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgThumbsDownEmoji, 1.2);
+    }
+
+    @FXML
+    void imgThumbsDownEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgThumbsDownEmoji, 1.0);
+    }
+
+    @FXML
+    void imgWinkingFaceEmojiOnMouseEntered(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgWinkingFaceEmoji, 1.2);
+    }
+
+    @FXML
+    void imgWinkingFaceEmojiOnMouseExited(MouseEvent event) {
+        TransitionUtil.ScaleTransition(imgWinkingFaceEmoji, 1.0);
+    }
+
+    /*private void changeTheme() {
+        if ()
+        vBox.setStyle();
+        scrollPane.setStyle();
+        messageAreaPane.setStyle();
+
+        txtMessage.setStyle();
+        txtMessagePane.setStyle();
+    }
+
+    @FXML
+    void themeChangeBtnOnAction(ActionEvent event) {
+        changeTheme();
+    }
+
+    @FXML
+    void themeViewOnAction(MouseEvent event) {
+        if(themeView.getImage().getUrl().equals(new Image("img/light.png").getUrl())){
+            root.setStyle("-fx-background-color: #fefae0;");
+            textArea.getStyleClass().removeAll("dark-text");
+            textArea.getStyleClass().add("light-text");
+            header.setStyle("-fx-background-color: #2a9a84;");
+            themeView.setImage(new Image("img/dark.png"));
+        }else{
+            root.setStyle("-fx-background-color:  #2f3e46;");
+            textArea.getStyleClass().removeAll("light-text");
+            textArea.getStyleClass().add("dark-text");
+            header.setStyle("-fx-background-color: transparent;");
+            themeView.setImage(new Image("img/light.png"));;
+        }
+    }*/
 }
