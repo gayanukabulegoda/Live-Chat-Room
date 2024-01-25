@@ -20,7 +20,7 @@ Embrace a more engaging and supportive work environment with the PlayTech Chat a
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Info](#info)
+- [License](#license)
 
 ## Visual Insights
 
