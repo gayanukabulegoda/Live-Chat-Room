@@ -32,6 +32,7 @@ import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class ChatRoomFormController {
@@ -198,7 +199,7 @@ public class ChatRoomFormController {
     @FXML
     private VBox vBox;
 
-    Socket remoteSocket;
+    private Socket remoteSocket;
     private File file;
     private String base64Image;
     private PrintWriter printWriter;
@@ -326,9 +327,11 @@ public class ChatRoomFormController {
     private File decodeReceivedImage(String path) throws IOException {
         byte[] imageBytes = Base64.getDecoder().decode(path); // Decode Base64 image data
 
-        // Create a file to save the received image
-        String fileName = "Received Image File";
-        File receivedImageFile = new File(fileName);
+        // Set file path & create a file to save the received image
+        int randomNumber = new Random().nextInt(1000000);
+        String fileName = "ReceivedImage_" + randomNumber + ".png";
+        File directoryPath = new File("Client_01/src/main/resources/receivedImages");
+        File receivedImageFile = new File(directoryPath, fileName);
 
         // Write the image bytes to the file
         try (FileOutputStream fos = new FileOutputStream(receivedImageFile)) {
@@ -586,6 +589,7 @@ public class ChatRoomFormController {
 
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
+        printWriter.println("lef" + lblUsername.getText() + ": leaving");
         NavigationUtil.switchNavigation("loginForm.fxml",event);
     }
 
@@ -1013,6 +1017,16 @@ public class ChatRoomFormController {
         imgMinimizeIcon.setImage(new Image("assests/icon/minimizeIcon.png"));
         imgBackIcon.setImage(new Image("assests/icon/backBtnIcon.png"));
 
+        // Apply styles directly to vertical scroll bar
+        scrollPane.lookup(".scroll-bar:vertical .thumb").
+                setStyle("-fx-background-color: #C0C0C0; -fx-background-radius: 5em;");
+        scrollPane.lookup(".scroll-bar:vertical .track").
+                setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        scrollPane.lookup(".increment-button").
+                setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        scrollPane.lookup(".decrement-button").
+                setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+
         themeChangePane.setStyle("-fx-background-color: white;" +
                 "-fx-background-radius: 25px");
 
@@ -1075,6 +1089,16 @@ public class ChatRoomFormController {
         imgCloseIcon.setImage(new Image("assests/icon/closeIconSilver.png"));
         imgMinimizeIcon.setImage(new Image("assests/icon/minimizeIconSilver.png"));
         imgBackIcon.setImage(new Image("assests/icon/backBtnIconSilver.png"));
+
+        // Apply styles directly to vertical scroll bar
+        scrollPane.lookup(".scroll-bar:vertical .thumb").
+                setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5em;");
+        scrollPane.lookup(".scroll-bar:vertical .track").
+                setStyle("-fx-background-color: #001F3F; -fx-border-color: #001F3F;");
+        scrollPane.lookup(".increment-button").
+                setStyle("-fx-background-color: #001F3F; -fx-border-color: #001F3F;");
+        scrollPane.lookup(".decrement-button").
+                setStyle("-fx-background-color: #001F3F; -fx-border-color: #001F3F;");
 
         themeChangePane.setStyle("-fx-background-color: #A9A9A9;" +
                 "-fx-background-radius: 25px");

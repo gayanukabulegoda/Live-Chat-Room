@@ -41,7 +41,7 @@ public class LoginFormController {
         }
         else {
             lblUserNameAlert.setText("Invalid! Username should have at least\n" +
-                    "FOUR characters (except symbols)");
+                    "FOUR characters (except Symbols & Spaces)");
         }
     }
 

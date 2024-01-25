@@ -84,7 +84,7 @@
       <Circle fill="DODGERBLUE" layoutX="872.0" layoutY="406.0" radius="20.5" stroke="DODGERBLUE" strokeType="INSIDE" style="-fx-fill: white; -fx-stroke: white;" visible="false" />
       <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="860.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../shouldDelete/addEmployeeIcon.png" />
+            <Image url="@.." />
          </image>
       </ImageView>
       <JFXButton layoutX="853.0" layoutY="387.0" prefHeight="38.0" prefWidth="38.0" style="-fx-background-radius: 100;" text=" " visible="false" />

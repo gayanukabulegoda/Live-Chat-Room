@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class AppInitializer extends Application {
+
+    public static Stage loginStage;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -20,5 +23,6 @@ public class AppInitializer extends Application {
         stage.initStyle(StageStyle.DECORATED);
         stage.centerOnScreen();
         stage.show();
+        loginStage = stage;
     }
 }
