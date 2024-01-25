@@ -80,5 +80,5 @@ This project is licensed under [MIT License](LICENSE).
 <a href="https://linuxmint.com/download_all.php" target="blank"><img src = "https://img.shields.io/badge/Linux_Mint-100000?style=for-the-badge&logo=linux-mint&logoColor=white"></a>
 </div> <br>
 <p align="center">
-  &copy; 2023 Gayanuka Bulegoda
+  &copy; 2024 Gayanuka Bulegoda
 </p>
