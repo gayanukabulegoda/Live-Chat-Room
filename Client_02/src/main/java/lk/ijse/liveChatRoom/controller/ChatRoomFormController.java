@@ -241,7 +241,6 @@ public class ChatRoomFormController {
                         HBox hBox = new HBox();
                         if (lblUsername.getText().equals(finalName)) {
                             Label joinText = new Label("You have joined the Chat");
-                            joinText.getStyleClass().add("join-text");
 
                             hBox.getChildren().add(joinText);
                             hBox.setAlignment(Pos.CENTER);
@@ -249,7 +248,6 @@ public class ChatRoomFormController {
                         }
                         else {
                             Label joinText = new Label(finalName+" has joined the Chat");
-                            joinText.getStyleClass().add("join-text");
                             hBox.getChildren().add(joinText);
                             hBox.setAlignment(Pos.CENTER);
                             hBox.setPadding(new Insets(5,5,5,10));
@@ -261,7 +259,6 @@ public class ChatRoomFormController {
                     // display the client who left the chat
                     else if (firstCharacter.equalsIgnoreCase("lef")) {
                         Label leftText = new Label(finalName + " has left the Chat");
-                        leftText.getStyleClass().add("left-text");
 
                         HBox hBox = new HBox();
                         hBox.getChildren().add(leftText);
@@ -291,7 +288,6 @@ public class ChatRoomFormController {
 
         Text time = new Text(dateTimeFormatter.format(now));
         time.setFont(Font.font(10));
-        time.getStyleClass().add("time-text");
 
         HBox timeBox = new HBox();
         timeBox.getChildren().add(time);
@@ -352,6 +348,7 @@ public class ChatRoomFormController {
         ImageView imageView =  new ImageView(receivedImage);
         imageView.setFitHeight(300);
         imageView.setFitWidth(300);
+        imageView.setPreserveRatio(true);
 
         HBox imageBox = new HBox(imageView);
         imageBox.setPadding(new Insets(5));
